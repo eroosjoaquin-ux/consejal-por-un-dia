@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concejal por un Día · HCD San Vicente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul: #1a3a5c;
+    --azul-medio: #2563a8;
+    --celeste: #38b6d8;
+    --gris-oscuro: #1e2533;
+    --gris: #4a5568;
+    --gris-claro: #f0f4f8;
+    --blanco: #ffffff;
+    --dorado: #c9960c;
+    --dorado-claro: #f5c842;
+    --texto: #1e2533;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blanco);
+    color: var(--texto);
+    line-height: 1.6;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--azul);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .topbar a { color: var(--celeste); text-decoration: none; }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--azul) 0%, #0d2640 60%, #112038 100%);
+    color: white;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(56,182,216,.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,150,12,.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px 56px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .logo-hcd {
+    background: white;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+  }
+  .logo-hcd span:first-child {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--azul-medio);
+    letter-spacing: -1px;
+  }
+  .logo-hcd span:last-child {
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--gris);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .logo-text { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.7); line-height: 1.4; }
+  .logo-text strong { color: white; font-size: 15px; display: block; }
+
+  .badge-oficial {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(56,182,216,.15);
+    border: 1px solid rgba(56,182,216,.3);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--celeste);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 18px;
+  }
+  .badge-oficial::before { content: ''; width: 6px; height: 6px; background: var(--celeste); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 6vw, 68px);
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--celeste);
+  }
+  .header-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,.72);
+    max-width: 520px;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  .header-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--dorado), var(--dorado-claro));
+    color: #1a1a00;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 24px rgba(201,150,12,.35);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,150,12,.4); }
+
+  .btn-ghost {
+    background: transparent;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 14px 24px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.25);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background .15s, border-color .15s;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.4); }
+
+  /* CONTADOR */
+  .counter-box {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 20px;
+    padding: 28px 32px;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    position: relative;
+    z-index: 2;
+  }
+  .counter-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 80px;
+    color: var(--dorado-claro);
+    line-height: 1;
+    display: block;
+  }
+  .counter-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,.6);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-top: 6px;
+    display: block;
+  }
+  .counter-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #4ade80;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-top: 10px;
+  }
+  .counter-live::before { content: ''; width: 5px; height: 5px; background: #4ade80; border-radius: 50%; animation: pulse 1.5s infinite; }
+
+  /* ── FOTO DEL RECINTO ── */
+  .recinto-strip {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+  }
+  .recinto-strip img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+  .recinto-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, var(--azul) 0%, transparent 30%, transparent 60%, rgba(0,0,0,.7) 100%);
+  }
+  .recinto-caption {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .recinto-caption strong { font-size: 18px; display: block; font-family: 'DM Serif Display', serif; }
+
+  /* ── SECCIONES GENERALES ── */
+  section { padding: 72px 24px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--azul-medio);
+    background: #e8f0fb;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    color: var(--azul);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .section-desc {
+    font-size: 16px;
+    color: var(--gris);
+    max-width: 600px;
+    margin-bottom: 48px;
+    font-weight: 400;
+  }
+
+  /* ── ETAPAS ── */
+  .etapas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .etapa-card {
+    background: var(--gris-claro);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #dde5f0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .etapa-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); transform: translateY(-2px); }
+  .etapa-num {
+    background: var(--azul);
+    color: white;
+    font-weight: 800;
+    font-size: 15px;
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .etapa-card h4 { font-size: 15px; font-weight: 700; color: var(--azul); margin-bottom: 5px; }
+  .etapa-card p { font-size: 13px; color: var(--gris); line-height: 1.5; }
+
+  /* ── MANUALES / TARJETAS DE CONTENIDO ── */
+  .manuales-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .manual-card {
+    background: white;
+    border: 1px solid #dde5f0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    display: flex;
+    flex-direction: column;
+  }
+  .manual-card-top {
+    padding: 24px 24px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .manual-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .manual-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--azul);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .manual-card p { font-size: 13px; color: var(--gris); line-height: 1.6; }
+  .manual-card-body { padding: 16px 24px; flex: 1; }
+  .manual-card-body ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .manual-card-body ul li {
+    font-size: 13px;
+    color: var(--gris);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.45;
+  }
+  .manual-card-body ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--azul-medio);
+    font-weight: 700;
+  }
+  .manual-card-footer {
+    padding: 16px 24px 24px;
+    display: flex;
+    gap: 10px;
+  }
+  .btn-escuchar {
+    flex: 1;
+    background: var(--azul);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    transition: background .15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-escuchar:hover { background: var(--azul-medio); }
+  .btn-escuchar.btn-stop { background: #dc2626; }
+  .btn-escuchar.btn-stop:hover { background: #b91c1c; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(10,20,40,.65);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s;
+  }
+  .modal-overlay.active { opacity: 1; pointer-events: all; }
+  .modal {
+    background: white;
+    border-radius: 24px;
+    max-width: 620px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 80px rgba(0,0,0,.25);
+    transform: translateY(20px);
+    transition: transform .2s;
+  }
+  .modal-overlay.active .modal { transform: translateY(0); }
+  .modal-header {
+    padding: 28px 28px 0;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    position: sticky; top: 0; background: white;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+  }
+  .modal-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--azul); }
+  .modal-subtitle { font-size: 13px; color: var(--gris); margin-top: 4px; }
+  .modal-close {
+    background: #f0f4f8; border: none; border-radius: 8px; width: 36px; height: 36px;
+    cursor: pointer; font-size: 16px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    transition: background .15s;
+  }
+  .modal-close:hover { background: #dde5f0; }
+  .modal-body { padding: 24px 28px; }
+  .modal-body h4 { font-size: 15px; font-weight: 700; color: var(--azul); margin: 18px 0 8px; }
+  .modal-body p { font-size: 14px; color: var(--gris); line-height: 1.7; margin-bottom: 10px; }
+  .modal-body ul { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+  .modal-body ul li { font-size: 14px; color: var(--gris); padding-left: 18px; position: relative; line-height: 1.5; }
+  .modal-body ul li::before { content: '▸'; position: absolute; left: 0; color: var(--azul-medio); font-weight: 700; }
+  .modal-body .highlight-box {
+    background: #e8f0fb; border-left: 4px solid var(--azul-medio);
+    border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 14px 0;
+    font-size: 13px; color: var(--azul); font-weight: 500;
+  }
+  .modal-audio-bar {
+    padding: 16px 28px 28px;
+    display: flex; gap: 10px;
+    position: sticky; bottom: 0; background: white;
+    border-top: 1px solid #eee;
+  }
+  .modal-audio-bar .btn-escuchar { font-size: 14px; padding: 14px; }
+
+  /* ── BLOQUES POLÍTICOS ── */
+  .bloques-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .bloque-card {
+    border-radius: 18px;
+    padding: 24px;
+    border: 1px solid transparent;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .bloque-card.liberal { background: #fffbeb; border-color: #fde68a; }
+  .bloque-card.progresista { background: #eff6ff; border-color: #bfdbfe; }
+  .bloque-card.ambiental { background: #f0fdf4; border-color: #bbf7d0; }
+  .bloque-card.vecinalista { background: #faf5ff; border-color: #e9d5ff; }
+
+  .bloque-badge {
+    font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px; display: inline-block; width: fit-content;
+  }
+  .liberal .bloque-badge { background: #fde68a; color: #92400e; }
+  .progresista .bloque-badge { background: #bfdbfe; color: #1e40af; }
+  .ambiental .bloque-badge { background: #bbf7d0; color: #065f46; }
+  .vecinalista .bloque-badge { background: #e9d5ff; color: #6b21a8; }
+
+  .bloque-card h4 { font-size: 17px; font-weight: 700; color: var(--azul); margin-bottom: 0; }
+  .bloque-card p { font-size: 13px; color: var(--gris); line-height: 1.5; }
+  .bloque-frases { display: flex; flex-direction: column; gap: 6px; }
+  .bloque-frase {
+    font-size: 12px; font-style: italic; color: var(--gris);
+    background: rgba(255,255,255,.7); padding: 6px 10px; border-radius: 8px;
+    border-left: 3px solid currentColor;
+  }
+  .liberal .bloque-frase { border-color: #d97706; }
+  .progresista .bloque-frase { border-color: #2563eb; }
+  .ambiental .bloque-frase { border-color: #059669; }
+  .vecinalista .bloque-frase { border-color: #7c3aed; }
+  .bloque-sorteo {
+    font-size: 11px; font-weight: 700; color: var(--gris); text-align: center;
+    background: rgba(255,255,255,.6); border-radius: 8px; padding: 6px;
+    text-transform: uppercase; letter-spacing: .06em;
+  }
+
+  /* ── PREMIOS ── */
+  .premios-section {
+    background: var(--azul);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .premios-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,.015) 40px, rgba(255,255,255,.015) 80px);
+  }
+  .premios-section .section-tag { background: rgba(56,182,216,.2); color: var(--celeste); }
+  .premios-section h2 { color: white; }
+  .premios-section .section-desc { color: rgba(255,255,255,.65); }
+
+  .premios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .premio-card {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 18px;
+    padding: 28px 22px;
+    text-align: center;
+    transition: background .2s, transform .2s;
+  }
+  .premio-card:hover { background: rgba(255,255,255,.12); transform: translateY(-3px); }
+  .premio-emoji { font-size: 40px; display: block; margin-bottom: 12px; }
+  .premio-card h4 { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--dorado-claro); margin-bottom: 8px; }
+  .premio-card p { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.5; }
+  .diploma-note {
+    background: rgba(201,150,12,.15);
+    border: 1px solid rgba(201,150,12,.3);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-top: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--dorado-claro);
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+  .diploma-note strong { font-size: 16px; display: block; margin-bottom: 4px; }
+
+  /* ── FORMULARIO ── */
+  .form-section { background: var(--gris-claro); }
+  .form-container {
+    max-width: 640px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 4px 40px rgba(0,0,0,.08);
+    border: 1px solid #dde5f0;
+  }
+  .form-container h3 { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--azul); margin-bottom: 8px; }
+  .form-container p { font-size: 14px; color: var(--gris); margin-bottom: 28px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block; font-size: 12px; font-weight: 700; color: var(--azul);
+    text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px;
+  }
+  .form-group input {
+    width: 100%; padding: 13px 16px;
+    border: 1.5px solid #dde5f0; border-radius: 10px;
+    font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--texto);
+    outline: none; transition: border-color .15s;
+    background: #fafbfd;
+  }
+  .form-group input:focus { border-color: var(--azul-medio); background: white; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-submit {
+    width: 100%; padding: 16px;
+    background: var(--azul);
+    color: white; border: none; border-radius: 12px;
+    font-size: 15px; font-weight: 800; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; margin-top: 8px;
+    letter-spacing: .04em; text-transform: uppercase;
+    transition: background .15s, transform .15s;
+    box-shadow: 0 4px 20px rgba(26,58,92,.3);
+  }
+  .form-submit:hover { background: var(--azul-medio); transform: translateY(-1px); }
+  .form-success {
+    display: none;
+    text-align: center; padding: 32px;
+  }
+  .form-success .check { font-size: 48px; margin-bottom: 12px; }
+  .form-success h4 { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--azul); margin-bottom: 8px; }
+  .form-success p { font-size: 14px; color: var(--gris); }
+
+  /* ── MAPA ── */
+  .mapa-section { background: white; }
+  .mapa-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .mapa-info h3 { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--azul); margin-bottom: 12px; }
+  .mapa-info p { font-size: 15px; color: var(--gris); line-height: 1.7; margin-bottom: 20px; }
+  .dir-box {
+    background: var(--gris-claro); border-radius: 14px; padding: 20px;
+    border: 1px solid #dde5f0; margin-bottom: 20px;
+    font-size: 15px; color: var(--azul); font-weight: 600;
+  }
+  .dir-box small { font-size: 12px; font-weight: 400; color: var(--gris); display: block; margin-top: 2px; }
+  .mapa-embed {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,.12);
+    height: 300px;
+    background: #dde5f0;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .mapa-placeholder {
+    text-align: center; color: var(--gris);
+  }
+  .mapa-placeholder p { font-size: 13px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--gris-oscuro);
+    color: rgba(255,255,255,.55);
+    padding: 40px 24px;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+  }
+  .footer-brand { display: flex; align-items: center; gap: 14px; }
+  .footer-logo {
+    background: rgba(255,255,255,.1);
+    border-radius: 10px; padding: 8px 12px;
+    font-size: 20px; font-weight: 800; color: white; letter-spacing: -1px;
+  }
+  .footer-text strong { color: white; font-size: 14px; display: block; }
+  .footer-text span { font-size: 12px; }
+  .footer-right { text-align: right; font-size: 12px; line-height: 1.7; }
+
+  /* ── BOTÓN FLOTANTE CONTACTO ── */
+  .fab-contact {
+    position: fixed; bottom: 28px; right: 28px;
+    background: var(--azul);
+    color: white; border: none; border-radius: 50px;
+    padding: 14px 22px;
+    font-size: 14px; font-weight: 700; font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(26,58,92,.45);
+    display: flex; align-items: center; gap: 8px;
+    z-index: 500;
+    transition: transform .2s, background .15s;
+    letter-spacing: .03em;
+  }
+  .fab-contact:hover { transform: scale(1.04); background: var(--azul-medio); }
+
+  /* ── MODAL CONTACTO ── */
+  .modal-contacto .modal { max-width: 440px; }
+
+  /* ── NOVEDADES ── */
+  .novedades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 22px;
+  }
+  .novedad-card {
+    background: white; border: 1px solid #dde5f0; border-radius: 18px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,.04);
+  }
+  .novedad-img {
+    height: 120px; background: linear-gradient(135deg, var(--azul), var(--azul-medio));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+  }
+  .novedad-body { padding: 18px; }
+  .novedad-tag {
+    font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--azul-medio); background: #e8f0fb; padding: 3px 10px; border-radius: 20px;
+    display: inline-block; margin-bottom: 8px;
+  }
+  .novedad-body h4 { font-size: 15px; font-weight: 700; color: var(--azul); margin-bottom: 6px; line-height: 1.3; }
+  .novedad-body p { font-size: 13px; color: var(--gris); line-height: 1.5; }
+  .novedad-footer {
+    padding: 0 18px 18px;
+  }
+  .novedad-footer .btn-escuchar { font-size: 12px; padding: 10px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .header-inner { grid-template-columns: 1fr; }
+    .counter-box { order: -1; }
+    .mapa-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .footer-right { text-align: left; }
+    .fab-contact span { display: none; }
+    .fab-contact { border-radius: 50%; width: 56px; height: 56px; padding: 0; justify-content: center; }
+  }
+
+  /* ── SECCIÓN SEPARADOR ── */
+  .divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--azul) 0%, var(--celeste) 50%, transparent 100%);
+  }
+
+  /* ── PANEL NOVEDAD ADMIN (Supabase) ── */
+  .novedad-admin-panel {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+  .novedad-admin-card {
+    background: white;
+    border: 1px solid #dde5f0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(26,58,92,.08);
+    display: flex;
+    gap: 0;
+  }
+  .novedad-admin-img {
+    width: 300px;
+    min-height: 220px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--azul), var(--azul-medio));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .novedad-admin-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+  }
+  .novedad-admin-content {
+    flex: 1;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .novedad-admin-tag {
+    font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+    color: var(--azul-medio); background: #e8f0fb; padding: 4px 12px; border-radius: 20px;
+    display: inline-block; width: fit-content;
+  }
+  .novedad-admin-content h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(20px, 2.5vw, 26px);
+    color: var(--azul);
+    line-height: 1.2;
+    margin: 0;
+  }
+  .novedad-admin-content p {
+    font-size: 15px;
+    color: var(--gris);
+    line-height: 1.7;
+    flex: 1;
+  }
+  .novedad-admin-skeleton {
+    background: var(--gris-claro);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    color: var(--gris);
+    font-size: 14px;
+    border: 2px dashed #dde5f0;
+  }
+  @media (max-width: 700px) {
+    .novedad-admin-card { flex-direction: column; }
+    .novedad-admin-img { width: 100%; min-height: 160px; }
+  }
+
+  /* ── ACORDEÓN ── */
+  .acordeon-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .acordeon-item {
+    border-bottom: 1px solid #dde5f0;
+  }
+  .acordeon-item:first-child {
+    border-top: 1px solid #dde5f0;
+  }
+  .acordeon-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 4px;
+    cursor: pointer;
+    user-select: none;
+    gap: 16px;
+    transition: background .15s;
+    border-radius: 4px;
+  }
+  .acordeon-header:hover { background: #f8fafc; margin: 0 -8px; padding-left: 12px; padding-right: 12px; }
+  .acordeon-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .acordeon-tag {
+    font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--azul-medio); background: #e8f0fb; padding: 3px 10px; border-radius: 20px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .acordeon-titulo {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: var(--azul);
+    line-height: 1.1;
+    margin: 0;
+  }
+  .acordeon-flecha {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--gris-claro);
+    border: 1px solid #dde5f0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    transition: transform .3s, background .2s;
+    color: var(--azul);
+  }
+  .acordeon-item.abierto .acordeon-flecha {
+    transform: rotate(180deg);
+    background: var(--azul);
+    color: white;
+    border-color: var(--azul);
+  }
+  .acordeon-body {
+    display: none;
+    padding: 0 0 32px 0;
+    animation: fadeIn .2s ease;
+  }
+  .acordeon-item.abierto .acordeon-body {
+    display: block;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>🏛️ Honorable Concejo Deliberante de San Vicente · Provincia de Buenos Aires</span>
+  <span>📍 9 de Julio 47, San Vicente · <a href="mailto:compudelconsejo@gmail.com">compudelconsejo@gmail.com</a></span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="header-logo">
+        <div class="logo-hcd">
+          <span>HCD</span>
+          <span>San Vicente</span>
+        </div>
+        <div class="logo-text">
+          <strong>Honorable Concejo Deliberante</strong>
+          San Vicente · Prov. de Buenos Aires
+        </div>
+      </div>
+      <div class="badge-oficial">Programa Oficial de Formación Cívica 2025</div>
+      <h1>Concejal<br><em>por un Día</em></h1>
+      <p class="header-sub">Ocupá una banca real. Debatí proyectos de ley. Votá ordenanzas. Y competí por los premios más codiciados de la jornada.</p>
+      <div class="header-ctas">
+        <a href="#inscripcion" class="btn-primary">🚀 Quiero inscribirme</a>
+        <a href="#programa" class="btn-ghost">Ver el programa completo</a>
+      </div>
+    </div>
+    <div class="counter-box">
+      <span class="counter-number" id="contador">27</span>
+      <span class="counter-label">Jóvenes ya inscriptos</span>
+      <div class="counter-live">En vivo · San Vicente</div>
+    </div>
+  </div>
+</header>
+
+<!-- FOTO RECINTO -->
+<div class="recinto-strip">
+  <img src="480770007_939832838322348_975756025733705890_n.jpg" alt="Recinto del HCD San Vicente" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a3a5c,#0d2640)';this.style.display='none'">
+  <div class="recinto-overlay"></div>
+  <div class="recinto-caption">
+    <strong>📸 El Recinto Histórico del HCD San Vicente</strong>
+    Acá van a debatir. Acá van a votar. En las bancas reales de los concejales de San Vicente.
+  </div>
+</div>
+
+<!-- BANNER CAPACITACIÓN OBLIGATORIA -->
+<div style="background:linear-gradient(135deg,#1e40af 0%,#1a3a5c 100%);border-top:4px solid #f5c842;border-bottom:4px solid #f5c842;padding:32px 24px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(245,200,66,.15) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;position:relative;z-index:1;">
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <div style="background:#f5c842;border-radius:16px;padding:16px;font-size:36px;flex-shrink:0;line-height:1;">💻</div>
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(245,200,66,.2);border:1px solid rgba(245,200,66,.5);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:800;color:#f5c842;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">
+          <span style="width:6px;height:6px;background:#f5c842;border-radius:50%;display:inline-block;animation:pulse 1.5s infinite;"></span>
+          ⚠️ Paso obligatorio antes del simulacro
+        </div>
+        <div style="font-family:'DM Serif Display',serif;font-size:clamp(20px,3vw,28px);color:white;font-weight:700;margin-bottom:6px;line-height:1.2;">Capacitación Virtual Obligatoria por Google Meet</div>
+        <div style="font-size:14px;color:rgba(255,255,255,.82);max-width:560px;line-height:1.6;">A cargo de la <strong style="color:white;">Concejal Verónica Sagol</strong>. Dura entre 1 hora y 1 hora 30 minutos. <strong style="color:#f5c842;">Sin completar esta capacitación, no podés participar del simulacro presencial.</strong> Al inscribirte te llegará el link por correo.</div>
+      </div>
+    </div>
+    <div style="flex-shrink:0;">
+      <button class="btn-escuchar" onclick="toggleAudio(this,'audio-cap-banner')" style="background:#f5c842;color:#1a1a00;font-weight:800;font-size:14px;padding:14px 22px;white-space:nowrap;">▶ Escuchar detalles</button>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PANEL NOVEDAD ADMIN (Supabase) -->
+<div style="background:var(--gris-claro);border-bottom:1px solid #dde5f0;">
+  <div class="novedad-admin-panel">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+      <div class="section-tag" style="margin:0;">📢 Tablón oficial</div>
+      <span style="font-family:'DM Serif Display',serif;font-size:clamp(20px,2.5vw,26px);color:var(--azul);">Novedades del programa</span>
+    </div>
+    <div id="novedad-admin-container">
+      <div class="novedad-admin-skeleton">⏳ Cargando novedad...</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ACORDEÓN DE SECCIONES -->
+<div class="acordeon-wrapper" id="programa">
+
+  <!-- ACORDEÓN 1: ¿Cómo funciona el simulacro? -->
+  <div class="acordeon-item" id="ac-programa">
+    <div class="acordeon-header" onclick="toggleAcordeon('ac-programa')">
+      <div class="acordeon-header-left">
+        <span class="acordeon-tag">📋 Estructura del día</span>
+        <h2 class="acordeon-titulo">¿Cómo funciona el simulacro?</h2>
+      </div>
+      <div class="acordeon-flecha">▾</div>
+    </div>
+    <div class="acordeon-body">
+      <p class="section-desc">7 etapas consecutivas. Una experiencia que arranca con el debate en comisión y termina con la entrega de premios en el recinto oficial.</p>
+      <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-etapas-intro')" style="margin-bottom:32px;max-width:260px;font-size:13px;">▶ Escuchar resumen del día</button>
+      <div class="etapas-grid">
+        <div class="etapa-card" style="flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div class="etapa-num">1</div>
+            <div>
+              <h4>División en Bloques</h4>
+              <p>Los participantes se dividen en 4 bloques políticos por sorteo: Liberal (6), Progresista (6), Ambiental (4) y Vecinalista (4).</p>
+            </div>
+          </div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-etapa1')" style="font-size:12px;padding:9px;">▶ Escuchar</button>
+        </div>
+        <div class="etapa-card" style="flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div class="etapa-num">2</div>
+            <div>
+              <h4>Elaboración del Proyecto</h4>
+              <p>Cada equipo redacta un proyecto de ordenanza real. Liberal y Vecinalista trabajan Seguridad Pública; Progresista y Ambiental trabajan Limpieza y Reciclaje.</p>
+            </div>
+          </div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-etapa2')" style="font-size:12px;padding:9px;">▶ Escuchar</button>
+        </div>
+        <div class="etapa-card" style="flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div class="etapa-num">3</div>
+            <div>
+              <h4>Presentación en Mesa de Entradas</h4>
+              <p>Asignación del número de expediente oficial y giro al área de comisión correspondiente, igual que en una sesión real.</p>
+            </div>
+          </div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-etapa3')" style="font-size:12px;padding:9px;">▶ Escuchar</button>
+        </div>
+        <div class="etapa-card" style="flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div class="etapa-num">4</div>
+            <div>
+              <h4>Trabajo en Comisión</h4>
+              <p>Debate en grupos reducidos, preguntas, modificaciones y negociación de posiciones. El grueso del trabajo legislativo pasa acá.</p>
+            </div>
+          </div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-etapa4')" style="font-size:12px;padding:9px;">▶ Escuchar</button>
+        </div>
+        <div class="etapa-card" style="flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div class="etapa-num">5</div>
+            <div>
+              <h4>Dictamen y Orden del Día</h4>
+              <p>Redacción del dictamen y definición de qué proyectos pasan al recinto para el debate central.</p>
+            </div>
+          </div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-etapa5')" style="font-size:12px;padding:9px;">▶ Escuchar</button>
+        </div>
+        <div class="etapa-card" style="flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div class="etapa-num">6</div>
+            <div>
+              <h4>Debate en el Recinto</h4>
+              <p>Lectura del orden del día, debate formal por bloques ante el presidente del Concejo, cierre y votación final.</p>
+            </div>
+          </div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-etapa6')" style="font-size:12px;padding:9px;">▶ Escuchar</button>
+        </div>
+        <div class="etapa-card" style="flex-direction:column;gap:10px;border:2px solid var(--dorado);background:#fffbeb;">
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div class="etapa-num" style="background:var(--dorado);">7</div>
+            <div>
+              <h4>🏆 Premiación Oficial</h4>
+              <p>Entrega de reconocimientos a los ganadores en las categorías de Oratoria, Gestión, Estrategia y Técnica Legislativa.</p>
+            </div>
+          </div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-etapa7')" style="font-size:12px;padding:9px;background:var(--dorado);color:#1a1a00;">▶ Escuchar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACORDEÓN 2: Todo lo que necesitás saber -->
+  <div class="acordeon-item" id="ac-manuales">
+    <div class="acordeon-header" onclick="toggleAcordeon('ac-manuales')">
+      <div class="acordeon-header-left">
+        <span class="acordeon-tag">📚 Guías del Programa</span>
+        <h2 class="acordeon-titulo">Todo lo que necesitás saber antes de llegar</h2>
+      </div>
+      <div class="acordeon-flecha">▾</div>
+    </div>
+    <div class="acordeon-body">
+      <p class="section-desc">Tocá cada tarjeta para escuchar y leer la información completa. Podés parar el audio cuando quieras.</p>
+      <div class="manuales-grid">
+
+      <!-- TARJETA 1: PROPUESTA EDUCATIVA -->
+      <div class="manual-card">
+        <div style="padding:20px 24px 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div class="manual-icon" style="background:#e8f0fb;">📘</div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio1')" style="flex:1;min-width:120px;">▶ Escuchar</button>
+          <button class="btn-escuchar" style="flex:0;padding:12px 14px;background:var(--gris-claro);color:var(--azul);" onclick="abrirModal('modal1')">📖</button>
+        </div>
+        <div class="manual-card-body">
+          <h3>Propuesta Educativa y Fundamentos</h3>
+          <p>El objetivo principal es recrear el funcionamiento real de un Concejo Deliberante para que los estudiantes comprendan cómo nacen las ordenanzas y se vinculen con problemáticas locales concretas.</p>
+          <ul>
+            <li>Acercar a los jóvenes al HCD real de San Vicente</li>
+            <li>Comprender qué son las ordenanzas y cómo se debaten</li>
+            <li>Practicar oratoria, argumentación y negociación</li>
+            <li>Conectar con problemas reales del territorio local</li>
+            <li>Generar experiencia de participación ciudadana concreta</li>
+            <li>Construir liderazgo juvenil con base institucional</li>
+          </ul>
+          <div style="margin-top:12px;padding:12px;background:#e8f0fb;border-radius:10px;font-size:13px;color:var(--azul);">
+            <strong>¿Por qué importa?</strong> Las normas locales no surgen de la nada: nacen de demandas, acuerdos y decisiones políticas. Esta actividad transforma eso en algo concreto y vivido.
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 2: CAPACITACIÓN -->
+      <div class="manual-card">
+        <div style="padding:20px 24px 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div class="manual-icon" style="background:#eff6ff;">💻</div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio2')" style="flex:1;min-width:120px;background:var(--azul-medio);">▶ Escuchar</button>
+          <button class="btn-escuchar" style="flex:0;padding:12px 14px;background:var(--gris-claro);color:var(--azul);" onclick="abrirModal('modal2')">📖</button>
+        </div>
+        <div class="manual-card-body">
+          <h3>Capacitación Virtual Previa</h3>
+          <p>Antes del simulacro presencial, todos los participantes deberán completar una capacitación virtual obligatoria a cargo de la Concejal Verónica Sagol.</p>
+          <ul>
+            <li>Modalidad virtual por Google Meet, días previos al evento</li>
+            <li>Duración: entre 1 hora y 1 hora y 30 minutos</li>
+            <li>Qué es el HCD y cómo funciona realmente</li>
+            <li>El rol del concejal y cómo se presenta un proyecto</li>
+            <li>Qué es una ordenanza vs. resolución vs. comunicación</li>
+            <li>Cómo funciona una sesión legislativa real</li>
+            <li>Cierre con trivia interactiva en Kahoot</li>
+          </ul>
+          <div style="margin-top:12px;padding:12px;background:#eff6ff;border-radius:10px;font-size:13px;color:#1e40af;">
+            <strong>📩 Importante:</strong> Al inscribirte te llegará el link de Google Meet por correo. La capacitación es obligatoria para participar del simulacro presencial.
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 3: BLOQUES POLÍTICOS -->
+      <div class="manual-card">
+        <div style="padding:20px 24px 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div class="manual-icon" style="background:#f0fdf4;">🎭</div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio3')" style="flex:1;min-width:120px;background:#059669;">▶ Escuchar</button>
+          <button class="btn-escuchar" style="flex:0;padding:12px 14px;background:var(--gris-claro);color:var(--azul);" onclick="abrirModal('modal3')">📖</button>
+        </div>
+        <div class="manual-card-body">
+          <h3>Los 4 Bloques del Simulacro</h3>
+          <p>Vas a ser asignado a un bloque por sorteo el día del evento. Cada bloque tiene una forma de pensar y defender sus ideas. ¡Lo interesante es que vas a tener que argumentar desde esa postura!</p>
+          <ul>
+            <li><strong>Bloque Liberal:</strong> Libertad individual, eficiencia del Estado, iniciativa privada</li>
+            <li><strong>Bloque Progresista:</strong> Estado presente, inclusión social, ampliación de derechos</li>
+            <li><strong>Bloque Ambiental:</strong> Desarrollo sostenible, protección del medio ambiente</li>
+            <li><strong>Bloque Vecinalista:</strong> Soluciones rápidas y concretas para el vecino</li>
+          </ul>
+          <div style="margin-top:12px;padding:12px;background:#f0fdf4;border-radius:10px;font-size:13px;color:#065f46;">
+            <strong>🎲 Asignación por sorteo:</strong> No elegís tu bloque, te toca en el momento. El desafío es defender esa postura con la mejor argumentación posible.
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 4: PROYECTOS Y SIMULACRO -->
+      <div class="manual-card">
+        <div style="padding:20px 24px 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div class="manual-icon" style="background:#fff7ed;">🏛️</div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio4')" style="flex:1;min-width:120px;background:#b45309;">▶ Escuchar</button>
+          <button class="btn-escuchar" style="flex:0;padding:12px 14px;background:var(--gris-claro);color:var(--azul);" onclick="abrirModal('modal4')">📖</button>
+        </div>
+        <div class="manual-card-body">
+          <h3>Los Proyectos a Debatir</h3>
+          <p>Dos problemáticas reales de San Vicente y la región. Cada equipo deberá redactar un proyecto de ordenanza con título, fundamentación y articulado.</p>
+          <ul>
+            <li><strong>Proyecto A:</strong> Programa Municipal de Paradas Seguras e Iluminación Inteligente</li>
+            <li><strong>Proyecto B:</strong> Plan Integral de Limpieza, Reciclaje y Recuperación de Espacios Públicos</li>
+            <li>Cada proyecto necesita: título, problema identificado, objetivo y articulado</li>
+            <li>Los proyectos pasan por Comisión antes de llegar al Recinto</li>
+            <li>Cualquier bloque puede proponer modificaciones durante el debate</li>
+          </ul>
+          <div style="margin-top:12px;padding:12px;background:#fff7ed;border-radius:10px;font-size:13px;color:#92400e;">
+            <strong>💡 Tip estratégico:</strong> Los bloques que saben negociar modificaciones son los que más puntos acumulan. La oratoria importa, pero el consenso puede ser la clave del éxito.
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ACORDEÓN 3: Los 4 Bloques Políticos -->
+  <div class="acordeon-item" id="ac-bloques">
+    <div class="acordeon-header" onclick="toggleAcordeon('ac-bloques')">
+      <div class="acordeon-header-left">
+        <span class="acordeon-tag">🎭 Los roles del juego</span>
+        <h2 class="acordeon-titulo">Los 4 Bloques Políticos</h2>
+      </div>
+      <div class="acordeon-flecha">▾</div>
+    </div>
+    <div class="acordeon-body">
+      <p class="section-desc">Asignados por sorteo el día del evento. Estudiá todos porque no sabés cuál te toca. El que mejor defienda su bloque, gana.</p>
+      <div class="bloques-grid">
+        <div class="bloque-card liberal">
+          <div class="bloque-badge">Bloque Liberal · 6 participantes</div>
+          <h4>🔑 Liberal</h4>
+          <p>Creen en la libertad individual y un Estado eficiente y pequeño. Promueven la iniciativa privada como motor del desarrollo.</p>
+          <div class="bloque-frases">
+            <div class="bloque-frase">"El Estado no tiene que meterse en todo"</div>
+            <div class="bloque-frase">"Esto lo puede hacer mejor el sector privado"</div>
+            <div class="bloque-frase">"Menos impuestos, más libertad"</div>
+          </div>
+          <div class="bloque-sorteo">🎲 Se asigna por sorteo</div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-bloque1')" style="margin-top:4px;">▶ Escuchar descripción</button>
+        </div>
+        <div class="bloque-card progresista">
+          <div class="bloque-badge">Bloque Progresista · 6 participantes</div>
+          <h4>🤝 Progresista</h4>
+          <p>Defienden un Estado presente que garantice derechos y reduzca desigualdades. Priorizan las políticas públicas activas.</p>
+          <div class="bloque-frases">
+            <div class="bloque-frase">"El Estado tiene que estar presente"</div>
+            <div class="bloque-frase">"No todos tienen las mismas oportunidades"</div>
+            <div class="bloque-frase">"Esto es una cuestión de derechos"</div>
+          </div>
+          <div class="bloque-sorteo">🎲 Se asigna por sorteo</div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-bloque2')" style="margin-top:4px;">▶ Escuchar descripción</button>
+        </div>
+        <div class="bloque-card ambiental">
+          <div class="bloque-badge">Bloque Ambiental · 4 participantes</div>
+          <h4>🌿 Ambiental</h4>
+          <p>Priorizan el cuidado del ambiente y el desarrollo sostenible. Ninguna decisión vale si tiene impacto ambiental negativo.</p>
+          <div class="bloque-frases">
+            <div class="bloque-frase">"Hay que pensar en el futuro"</div>
+            <div class="bloque-frase">"No todo vale por crecer económicamente"</div>
+            <div class="bloque-frase">"Esto tiene impacto ambiental"</div>
+          </div>
+          <div class="bloque-sorteo">🎲 Se asigna por sorteo</div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-bloque3')" style="margin-top:4px;">▶ Escuchar descripción</button>
+        </div>
+        <div class="bloque-card vecinalista">
+          <div class="bloque-badge">Bloque Vecinalista · 4 participantes</div>
+          <h4>🏘️ Vecinalista</h4>
+          <p>Se enfocan en resolver problemas concretos de los vecinos. Menos discurso, más gestión. Las soluciones tienen que funcionar ya.</p>
+          <div class="bloque-frases">
+            <div class="bloque-frase">"El vecino necesita soluciones ya"</div>
+            <div class="bloque-frase">"Menos discurso, más gestión"</div>
+            <div class="bloque-frase">"Esto en la práctica no funciona"</div>
+          </div>
+          <div class="bloque-sorteo">🎲 Se asigna por sorteo</div>
+          <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-bloque4')" style="margin-top:4px;">▶ Escuchar descripción</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACORDEÓN 4 eliminado: Los premios van siempre visibles debajo -->
+
+</div><!-- fin acordeon-wrapper -->
+
+<!-- PREMIOS — siempre visible, estilo original -->
+<section class="premios-section">
+  <div class="section-inner">
+    <div class="section-tag">🏆 Competencia oficial</div>
+    <h2>Los premios que<br>se disputan en el recinto</h2>
+    <p class="section-desc">Al final de la jornada, el jurado evaluador del HCD entrega reconocimientos oficiales en 4 categorías. ¿Cuál es la tuya?</p>
+    <div class="premios-grid">
+      <div class="premio-card">
+        <span class="premio-emoji">🎤</span>
+        <h4>Mejor Oratoria</h4>
+        <p>Para el participante que demostró mayor dominio argumental, claridad expositiva y capacidad de persuasión ante el recinto.</p>
+      </div>
+      <div class="premio-card">
+        <span class="premio-emoji">🧠</span>
+        <h4>Mejor Estratega Político</h4>
+        <p>Para quien logró las alianzas más inteligentes, anticipó movimientos del adversario y condujo a su bloque con visión estratégica.</p>
+      </div>
+      <div class="premio-card">
+        <span class="premio-emoji">✍️</span>
+        <h4>Mejor Técnica Legislativa</h4>
+        <p>Para quien redactó el proyecto de ordenanza más sólido y estructurado, con articulado claro y fundamentación correcta.</p>
+      </div>
+      <div class="premio-card">
+        <span class="premio-emoji">🏛️</span>
+        <h4>Mejor Gestión Parlamentaria</h4>
+        <p>Para el bloque que mejor condujo todo el proceso: desde la comisión hasta el debate en el recinto, con mayor coherencia y resultados.</p>
+      </div>
+    </div>
+    <div class="diploma-note">
+      <strong>🎓 Diploma de Honor Oficial</strong>
+      Todos los participantes reciben un diploma institucional firmado por las autoridades del Honorable Concejo Deliberante de San Vicente. Un reconocimiento real para tu carpeta y tu futuro.
+    </div>
+    <div style="margin-top:20px;position:relative;z-index:1;">
+      <button class="btn-escuchar" onclick="toggleAudio(this, 'audio-premios')" style="max-width:320px;margin:0 auto;display:flex;font-size:14px;padding:14px;">▶ Escuchar sobre los premios</button>
+    </div>
+  </div>
+</section>
+
+<!-- INSCRIPCIÓN -->
+<section class="form-section" id="inscripcion">
+  <div class="section-inner">
+    <div class="section-tag">✍️ Registrate</div>
+    <h2 style="text-align:center;margin-bottom:32px;">Pre-inscripción oficial</h2>
+    <div class="form-container">
+      <h3>Completá tus datos</h3>
+      <p>Al registrarte te enviamos la confirmación y el link de Google Meet para la capacitación previa. Todos los campos son obligatorios.</p>
+      <form id="form-inscripcion">
+        <div class="form-group">
+          <label>Nombre y Apellido completo</label>
+          <input type="text" id="f-nombre" placeholder="Tu nombre y apellido" required>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Correo electrónico</label>
+            <input type="email" id="f-email" placeholder="tu@correo.com" required>
+          </div>
+          <div class="form-group">
+            <label>WhatsApp</label>
+            <input type="tel" id="f-wsp" placeholder="+54 11 ..." required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Escuela secundaria</label>
+          <input type="text" id="f-escuela" placeholder="Nombre de tu escuela" required>
+        </div>
+        <button type="submit" class="form-submit">🚀 Enviar inscripción</button>
+      </form>
+      <div class="form-success" id="form-exito">
+        <div class="check">🎉</div>
+        <h4>¡Inscripción recibida!</h4>
+        <p>Te enviamos un correo de confirmación. Revisá tu bandeja de entrada y pronto vas a recibir el link de la capacitación por Google Meet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPA / SEDE -->
+<section class="mapa-section" id="sede">
+  <div class="section-inner">
+    <div class="mapa-grid">
+      <div class="mapa-info">
+        <div class="section-tag">📍 Sede oficial</div>
+        <h3>El Recinto del HCD<br>San Vicente</h3>
+        <p>El simulacro se desarrolla en el Recinto Histórico de Sesiones del Honorable Concejo Deliberante de San Vicente. Las mismas bancas, los mismos micrófonos, el mismo salón donde sesionan los concejales reales.</p>
+        <div class="dir-box">
+          📍 9 de Julio 47 · San Vicente<br>
+          <small>B1865AWA, Gran Buenos Aires, Provincia de Buenos Aires</small>
+        </div>
+        <a href="https://maps.app.goo.gl/bBetWSynDbdfGTTi6" target="_blank" class="btn-primary" style="display:inline-block;">🗺️ Abrir en Google Maps</a>
+      </div>
+      <div>
+        <div class="mapa-embed">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3272!2d-58.4176!3d-35.0179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDAxJzA0LjQiUyA1OMKwMjUnMDMuNCJX!5e0!3m2!1ses!2sar!4v1234567890"
+            width="100%" height="300"
+            style="border:0;display:block;" allowfullscreen=""
+            loading="lazy"
+            onerror="this.style.display='none'"
+          ></iframe>
+          <div class="mapa-placeholder" style="position:absolute;">
+            <p style="font-size:32px;margin-bottom:8px;">📍</p>
+            <p><strong style="color:var(--azul);">HCD San Vicente</strong></p>
+            <p>9 de Julio 47</p>
+            <a href="https://maps.app.goo.gl/bBetWSynDbdfGTTi6" target="_blank" class="btn-primary" style="display:inline-block;margin-top:12px;font-size:12px;padding:10px 18px;">Ver en Maps</a>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <img src="273401637_246625124309793_6354355193394359531_n.jpg" alt="Logo HCD San Vicente" style="height:80px;border-radius:12px;background:#f0f4f8;padding:8px;object-fit:contain;width:100%;max-width:200px;" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODALES DE CONTENIDO -->
+
+<!-- Modal 1: Propuesta Educativa -->
+<div class="modal-overlay" id="modal1">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">📘 Propuesta Educativa y Fundamentación</div>
+        <div class="modal-subtitle">Simulación Legislativa Juvenil · HCD San Vicente</div>
+      </div>
+      <button class="modal-close" onclick="cerrarModal('modal1')">✕</button>
+    </div>
+    <div class="modal-body">
+      <h4>¿Qué es Concejal por un Día?</h4>
+      <p>La actividad "Concejal por un Día" propone transformar el desconocimiento de las instituciones en una experiencia concreta: ocupar bancas, organizarse en bloques, debatir proyectos, escuchar posiciones diferentes, negociar modificaciones y votar iniciativas vinculadas con problemas reales del territorio de San Vicente.</p>
+      <div class="highlight-box">🎯 No buscamos únicamente simular una sesión. Buscamos generar una instancia real de aprendizaje cívico, liderazgo juvenil y participación activa.</div>
+      <h4>Objetivo General</h4>
+      <p>Recrear el funcionamiento de un Concejo Deliberante para que los estudiantes comprendan cómo se crean las ordenanzas, practiquen debate, negociación y argumentación, y se vinculen con problemáticas locales desde una experiencia participativa concreta.</p>
+      <h4>Objetivos Específicos</h4>
+      <ul>
+        <li>Acercar a los estudiantes al funcionamiento real del Honorable Concejo Deliberante de San Vicente</li>
+        <li>Explicar qué son las ordenanzas, cómo se tratan en comisión y cómo se debaten en el recinto</li>
+        <li>Promover habilidades de oratoria, argumentación, negociación y toma de decisiones</li>
+        <li>Vincular a los jóvenes con problemáticas locales concretas</li>
+        <li>Generar una experiencia práctica de participación ciudadana y formación cívica</li>
+        <li>Construir un primer acercamiento entre jóvenes, concejales y referentes locales</li>
+      </ul>
+      <h4>¿Por qué es importante?</h4>
+      <p>En un contexto donde la política enfrenta desafíos de legitimidad y distancia con la ciudadanía, este tipo de iniciativas permite reconstruir confianza desde la acción, la cercanía y la formación de nuevos liderazgos. La experiencia puede replicarse en distintos municipios adaptando los proyectos a las problemáticas locales.</p>
+      <h4>Impacto esperado</h4>
+      <ul>
+        <li>Incrementar la participación juvenil en la vida institucional local</li>
+        <li>Fortalecer habilidades de debate, negociación, escucha activa y argumentación</li>
+        <li>Generar conocimiento práctico sobre el funcionamiento del Concejo Deliberante</li>
+        <li>Vincular problemáticas locales con herramientas legislativas concretas</li>
+        <li>Construir liderazgo juvenil con anclaje territorial e institucional</li>
+        <li>Promover una ciudadanía joven más formada, activa y comprometida</li>
+      </ul>
+    </div>
+    <div class="modal-audio-bar">
+      <button class="btn-escuchar" onclick="toggleAudioModal(this, 'audio-modal1')">▶ Escuchar este manual</button>
+      <button class="btn-escuchar btn-stop" onclick="cerrarModal('modal1')">✕ Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2: Capacitación -->
+<div class="modal-overlay" id="modal2">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">💻 Capacitación Virtual Previa</div>
+        <div class="modal-subtitle">Formación Cívica Obligatoria · Por Google Meet</div>
+      </div>
+      <button class="modal-close" onclick="cerrarModal('modal2')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box">📅 Modalidad virtual · Días previos al simulacro · Duración: 1 a 1:30 hs · A cargo de: Concejal Verónica Sagol</div>
+      <h4>¿Para qué sirve la capacitación?</h4>
+      <p>Esta capacitación es la instancia previa indispensable para participar correctamente en el simulacro. No es un requisito burocrático: es donde vas a aprender todo lo necesario para desenvolverte en el recinto.</p>
+      <h4>Bloque 1: El HCD y sus funciones</h4>
+      <p>Diferencia entre Departamento Ejecutivo y Legislativo; qué es el HCD; funciones principales; importancia de la representación local; temas que puede tratar el Concejo Deliberante.</p>
+      <h4>Bloque 2: El rol del Concejal</h4>
+      <p>Qué es un concejal; cómo presenta proyectos; cómo debate y vota; cómo representa a los vecinos; cómo construye consensos dentro y fuera del bloque.</p>
+      <h4>Bloque 3: Las Comisiones Legislativas</h4>
+      <p>Qué son las comisiones, para qué sirven, cómo se analiza un proyecto antes de llegar al recinto, tipos de comisiones, importancia del consenso y la negociación.</p>
+      <h4>Bloque 4: ¿Qué es una Ordenanza?</h4>
+      <p>Diferencia entre ordenanza, resolución y comunicación. Cómo nace un proyecto legislativo. Estructura básica: título, fundamentación, problema identificado, objetivo, articulado y forma de implementación.</p>
+      <h4>Bloque 5: Funcionamiento de una Sesión</h4>
+      <p>Qué ocurre dentro del recinto; qué es el orden del día; apertura, quórum, presentación, debate, propuestas de modificación, votación y cierre. Roles: Presidente del Concejo, Secretario Legislativo, concejales, público y prensa.</p>
+      <h4>🎮 Cierre: Trivia en Kahoot</h4>
+      <p>La capacitación cierra con una trivia interactiva y dinámica en Kahoot para repasar todos los contenidos de forma divertida.</p>
+      <div class="highlight-box">📩 Al completar tu inscripción, te enviamos por correo el link de Google Meet para acceder a la capacitación virtual.</div>
+    </div>
+    <div class="modal-audio-bar">
+      <button class="btn-escuchar" onclick="toggleAudioModal(this, 'audio-modal2')">▶ Escuchar este manual</button>
+      <button class="btn-escuchar btn-stop" onclick="cerrarModal('modal2')">✕ Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3: Bloques -->
+<div class="modal-overlay" id="modal3">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">🎭 Guía de Bloques Políticos</div>
+        <div class="modal-subtitle">Asignación por sorteo el día del simulacro</div>
+      </div>
+      <button class="modal-close" onclick="cerrarModal('modal3')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="highlight-box">🎲 La asignación a cada bloque se realiza por sorteo el mismo día del evento. Estudiá todos porque no sabés cuál te toca.</div>
+      <h4>🔑 Bloque Liberal (6 participantes)</h4>
+      <p>Creen en la libertad individual como valor principal. Consideran que el Estado debe ser lo más pequeño y eficiente posible. Priorizan la iniciativa privada y la reducción del gasto público.</p>
+      <ul>
+        <li>Reducir impuestos y gasto público</li>
+        <li>Promover la iniciativa privada sobre el Estado</li>
+        <li>Limitar la intervención estatal en la economía y la vida cotidiana</li>
+        <li>Mejorar la eficiencia del Estado en sus funciones mínimas</li>
+      </ul>
+      <h4>🤝 Bloque Progresista (6 participantes)</h4>
+      <p>Creen en un Estado presente y activo, que garantice derechos y reduzca desigualdades. Las políticas públicas son la herramienta central para generar igualdad de oportunidades.</p>
+      <ul>
+        <li>Inclusión social como prioridad de gestión</li>
+        <li>Igualdad de oportunidades desde el Estado</li>
+        <li>Ampliación de derechos para todos los ciudadanos</li>
+        <li>Políticas públicas activas y financiamiento estatal</li>
+      </ul>
+      <h4>🌿 Bloque Ambiental (4 participantes)</h4>
+      <p>Priorizan el cuidado del ambiente y el desarrollo sostenible. Ninguna medida que tenga impacto ambiental negativo es aceptable sin compensación y alternativa.</p>
+      <ul>
+        <li>Protección ambiental por encima del crecimiento económico</li>
+        <li>Desarrollo sostenible como marco de todas las políticas</li>
+        <li>Conciencia ecológica en las decisiones legislativas</li>
+        <li>Reducción del impacto ambiental de la gestión pública</li>
+      </ul>
+      <h4>🏘️ Bloque Vecinalista (4 participantes)</h4>
+      <p>Se enfocan en resolver problemas concretos de los vecinos. Priorizan la cercanía con el ciudadano y las soluciones rápidas y prácticas por encima del debate ideológico.</p>
+      <ul>
+        <li>Soluciones rápidas a los problemas cotidianos del vecino</li>
+        <li>Gestión eficiente y sin burocracia innecesaria</li>
+        <li>Cercanía con el vecino y los problemas de cada barrio</li>
+        <li>Pragmatismo por encima de la ideología</li>
+      </ul>
+    </div>
+    <div class="modal-audio-bar">
+      <button class="btn-escuchar" onclick="toggleAudioModal(this, 'audio-modal3')">▶ Escuchar este manual</button>
+      <button class="btn-escuchar btn-stop" onclick="cerrarModal('modal3')">✕ Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 4: Proyectos -->
+<div class="modal-overlay" id="modal4">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">🏛️ Los Proyectos a Debatir</div>
+        <div class="modal-subtitle">Dos ordenanzas sobre problemáticas reales de San Vicente</div>
+      </div>
+      <button class="modal-close" onclick="cerrarModal('modal4')">✕</button>
+    </div>
+    <div class="modal-body">
+      <h4>Proyecto A: Seguridad y Espacio Público</h4>
+      <div class="highlight-box">📋 "Programa Municipal de Paradas Seguras e Iluminación Inteligente"</div>
+      <p>Los bloques Liberal y Vecinalista lideran este proyecto. Aborda la seguridad vial y el acceso seguro a los espacios públicos en San Vicente. Cada bloque debe definir su postura, redactar el articulado y defender sus argumentos en la sesión.</p>
+      <ul>
+        <li>El Liberal priorizará la eficiencia del gasto y el rol privado en la solución</li>
+        <li>El Vecinalista priorizará las soluciones rápidas y la demanda del vecino</li>
+        <li>Ambos pueden recibir modificaciones de los otros bloques en el recinto</li>
+      </ul>
+      <h4>Proyecto B: Limpieza y Medio Ambiente</h4>
+      <div class="highlight-box">📋 "Plan Integral de Limpieza, Reciclaje y Recuperación de Espacios Públicos"</div>
+      <p>Los bloques Progresista y Ambiental lideran este proyecto. Aborda la gestión de residuos urbanos, el reciclaje y la recuperación de espacios públicos degradados en San Vicente.</p>
+      <ul>
+        <li>El Progresista priorizará la inclusión social en el sistema de reciclaje</li>
+        <li>El Ambiental priorizará el impacto ecológico y la sostenibilidad</li>
+        <li>Ambos pueden recibir modificaciones de los otros bloques en el recinto</li>
+      </ul>
+      <h4>Estructura de un proyecto de ordenanza</h4>
+      <ul>
+        <li><strong>Título:</strong> Nombre del proyecto</li>
+        <li><strong>Problema identificado:</strong> Qué pasa en el territorio que genera la necesidad</li>
+        <li><strong>Fundamentación:</strong> Por qué es competencia del HCD abordar este tema</li>
+        <li><strong>Objetivo:</strong> Qué se busca lograr con la ordenanza</li>
+        <li><strong>Articulado:</strong> Los artículos de la ley en sí</li>
+        <li><strong>Implementación:</strong> Cómo se ejecuta y quién es responsable</li>
+      </ul>
+      <div class="highlight-box">💡 El bloque que mejor argumente su proyecto y logre sumar votos de otros bloques será el favorito del jurado.</div>
+    </div>
+    <div class="modal-audio-bar">
+      <button class="btn-escuchar" onclick="toggleAudioModal(this, 'audio-modal4')">▶ Escuchar este manual</button>
+      <button class="btn-escuchar btn-stop" onclick="cerrarModal('modal4')">✕ Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTÓN FLOTANTE CONTACTO -->
+<button class="fab-contact" onclick="abrirContacto()">
+  📩 <span>Contacto</span>
+</button>
+
+<!-- MODAL CONTACTO -->
+<div class="modal-overlay modal-contacto" id="modal-contacto">
+  <div class="modal" style="max-width:440px;">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">📩 Consultas</div>
+        <div class="modal-subtitle">Te responden desde el HCD San Vicente</div>
+      </div>
+      <button class="modal-close" onclick="cerrarModal('modal-contacto')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:14px;margin-bottom:16px;">Al tocar el botón se va a abrir tu app de correo con el destinatario cargado. Solo escribís tu consulta y enviás.</p>
+      <div class="dir-box" style="font-size:14px;">
+        📧 compudelconsejo@gmail.com<br>
+        <small>Concejo Deliberante de San Vicente</small>
+      </div>
+    </div>
+    <div class="modal-audio-bar">
+      <button class="btn-escuchar" onclick="abrirMail()" style="background:var(--azul-medio);">✉️ Abrir mi correo para consultar</button>
+      <button class="btn-escuchar btn-stop" style="flex:0;padding:14px 18px;" onclick="cerrarModal('modal-contacto')">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">HCD</div>
+      <div class="footer-text">
+        <strong>Honorable Concejo Deliberante de San Vicente</strong>
+        <span>9 de Julio 47 · B1865AWA · Gran Buenos Aires · Prov. de Buenos Aires</span>
+      </div>
+    </div>
+    <div class="footer-right">
+      <span>Programa de Formación Cívica y Participación Legislativa Juvenil</span><br>
+      <span>Área de Relaciones Institucionales y Extensión Comunitaria</span><br>
+      <a href="mailto:compudelconsejo@gmail.com" style="color:var(--celeste);text-decoration:none;">compudelconsejo@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<!-- AUDIOS (datos) -->
+<script>
+const AUDIOS = {
+  /* ── Banner capacitación ── */
+  'audio-cap-banner': 'Atención: antes del simulacro presencial hay una capacitación virtual obligatoria por Google Meet, a cargo de la Concejal Verónica Sagol. Dura entre una hora y una hora y treinta minutos. Sin completar esta capacitación no podés participar del simulacro presencial. Al inscribirte te llegará el link por correo electrónico.',
+
+  /* ── Etapas ── */
+  'audio-etapas-intro': 'El simulacro Concejal por un Día tiene siete etapas consecutivas. Una experiencia que arranca con el debate en comisión y termina con la entrega de premios en el recinto oficial.',
+  'audio-etapa1': 'Etapa uno: División en Bloques. Los participantes se dividen en cuatro bloques políticos por sorteo: Liberal con seis participantes, Progresista con seis, Ambiental con cuatro y Vecinalista con cuatro.',
+  'audio-etapa2': 'Etapa dos: Elaboración del Proyecto. Cada equipo redacta un proyecto de ordenanza real. Liberal y Vecinalista trabajan el tema de Seguridad Pública y espacio público; Progresista y Ambiental trabajan el tema de Limpieza y Reciclaje.',
+  'audio-etapa3': 'Etapa tres: Presentación en Mesa de Entradas. El proyecto recibe un número de expediente oficial y es girado al área de comisión correspondiente, igual que en una sesión real del Concejo Deliberante.',
+  'audio-etapa4': 'Etapa cuatro: Trabajo en Comisión. Los bloques debaten en grupos reducidos, hacen preguntas, proponen modificaciones y negocian posiciones. El grueso del trabajo legislativo pasa acá, antes de llegar al recinto.',
+  'audio-etapa5': 'Etapa cinco: Dictamen y Orden del Día. Se redacta el dictamen de comisión y se define qué proyectos pasan al recinto para el debate central.',
+  'audio-etapa6': 'Etapa seis: Debate en el Recinto. Se lee el orden del día, cada bloque expone sus argumentos de manera formal ante el presidente del Concejo, se debate, se proponen modificaciones y se realiza el cierre con la votación final.',
+  'audio-etapa7': 'Etapa siete: Premiación Oficial. El jurado del Honorable Concejo Deliberante entrega reconocimientos a los ganadores en las categorías de Oratoria, Gestión, Estrategia y Técnica Legislativa.',
+
+  /* ── Tarjetas de manuales ── */
+  'audio1': 'Propuesta Educativa y Fundamentos. El objetivo principal es recrear el funcionamiento real de un Concejo Deliberante para que los estudiantes comprendan cómo nacen las ordenanzas y se vinculen con problemáticas locales concretas. La actividad busca acercar a los jóvenes al HCD real de San Vicente, comprender qué son las ordenanzas y cómo se debaten, practicar oratoria, argumentación y negociación, conectar con problemas reales del territorio local, generar experiencia de participación ciudadana concreta, y construir liderazgo juvenil con base institucional. Las normas locales no surgen de la nada: nacen de demandas, acuerdos y decisiones políticas. Esta actividad transforma eso en algo concreto y vivido.',
+  'audio2': 'Capacitación Virtual Previa. Antes del simulacro presencial, todos los participantes deberán completar una capacitación virtual obligatoria a cargo de la Concejal Verónica Sagol. Es modalidad virtual por Google Meet, días previos al evento. Duración: entre una hora y una hora y treinta minutos. Se trabaja qué es el HCD y cómo funciona realmente, el rol del concejal y cómo se presenta un proyecto, qué es una ordenanza versus resolución versus comunicación, cómo funciona una sesión legislativa real, y se cierra con una trivia interactiva en Kahoot. Al inscribirte te llegará el link de Google Meet por correo. La capacitación es obligatoria para participar del simulacro presencial.',
+  'audio3': 'Los cuatro bloques del simulacro. Vas a ser asignado a un bloque por sorteo el día del evento. Cada bloque tiene una forma de pensar y defender sus ideas. Bloque Liberal: libertad individual, eficiencia del Estado e iniciativa privada. Bloque Progresista: Estado presente, inclusión social y ampliación de derechos. Bloque Ambiental: desarrollo sostenible y protección del medio ambiente. Bloque Vecinalista: soluciones rápidas y concretas para el vecino. No elegís tu bloque, te toca en el momento. El desafío es defender esa postura con la mejor argumentación posible.',
+  'audio4': 'Los proyectos a debatir. Hay dos problemáticas reales de San Vicente y la región. Cada equipo deberá redactar un proyecto de ordenanza con título, fundamentación y articulado. El Proyecto A es el Programa Municipal de Paradas Seguras e Iluminación Inteligente, liderado por los bloques Liberal y Vecinalista. El Proyecto B es el Plan Integral de Limpieza, Reciclaje y Recuperación de Espacios Públicos, liderado por los bloques Progresista y Ambiental. Cada proyecto necesita título, problema identificado, objetivo y articulado. Los proyectos pasan por comisión antes de llegar al recinto. Cualquier bloque puede proponer modificaciones durante el debate. Los bloques que saben negociar modificaciones son los que más puntos acumulan. La oratoria importa, pero el consenso puede ser la clave del éxito.',
+
+  /* ── Bloques políticos ── */
+  'audio-bloque1': 'Bloque Liberal. Seis participantes. Creen en la libertad individual y un Estado eficiente y pequeño. Promueven la iniciativa privada como motor del desarrollo. Sus frases características son: El Estado no tiene que meterse en todo; Esto lo puede hacer mejor el sector privado; Menos impuestos, más libertad. Se asigna por sorteo.',
+  'audio-bloque2': 'Bloque Progresista. Seis participantes. Defienden un Estado presente que garantice derechos y reduzca desigualdades. Priorizan las políticas públicas activas. Sus frases características son: El Estado tiene que estar presente; No todos tienen las mismas oportunidades; Esto es una cuestión de derechos. Se asigna por sorteo.',
+  'audio-bloque3': 'Bloque Ambiental. Cuatro participantes. Priorizan el cuidado del ambiente y el desarrollo sostenible. Ninguna decisión vale si tiene impacto ambiental negativo. Sus frases características son: Hay que pensar en el futuro; No todo vale por crecer económicamente; Esto tiene impacto ambiental. Se asigna por sorteo.',
+  'audio-bloque4': 'Bloque Vecinalista. Cuatro participantes. Se enfocan en resolver problemas concretos de los vecinos. Menos discurso, más gestión. Las soluciones tienen que funcionar ya. Sus frases características son: El vecino necesita soluciones ya; Menos discurso, más gestión; Esto en la práctica no funciona. Se asigna por sorteo.',
+
+  /* ── Premios ── */
+  'audio-premios': 'Los premios que se disputan en el recinto. Al final de la jornada, el jurado evaluador del HCD entrega reconocimientos oficiales en cuatro categorías. Mejor Oratoria: para el participante que demostró mayor dominio argumental, claridad expositiva y capacidad de persuasión ante el recinto. Mejor Estratega Político: para quien logró las alianzas más inteligentes, anticipó movimientos del adversario y condujo a su bloque con visión estratégica. Mejor Técnica Legislativa: para quien redactó el proyecto de ordenanza más sólido y estructurado, con articulado claro y fundamentación correcta. Mejor Gestión Parlamentaria: para el bloque que mejor condujo todo el proceso, desde la comisión hasta el debate en el recinto, con mayor coherencia y resultados. Además, todos los participantes reciben un diploma institucional firmado por las autoridades del Honorable Concejo Deliberante de San Vicente. Un reconocimiento real para tu carpeta y tu futuro.',
+
+  /* ── Novedades ── */
+  'audio-nov1': 'El Honorable Concejo Deliberante de San Vicente confirmó la habilitación del Recinto Histórico de Sesiones para la realización del simulacro legislativo juvenil.',
+  'audio-nov2': 'Próximamente: capacitación virtual por Google Meet. Días antes del simulacro presencial se realizará una capacitación virtual obligatoria. Al inscribirte, te llegará el link de Google Meet a tu correo electrónico con todos los detalles.',
+  'audio-nov3': 'Cuatro categorías de premiación con diploma oficial. Se confirmaron las cuatro categorías de reconocimiento: Mejor Oratoria, Mejor Estratega, Mejor Técnica Legislativa y Mejor Gestión Parlamentaria, todas con diploma firmado por el HCD.',
+
+  /* ── Modales ── */
+  'audio-modal1': 'Propuesta Educativa y Fundamentación. La actividad Concejal por un Día propone transformar el desconocimiento de las instituciones en una experiencia concreta: ocupar bancas, organizarse en bloques, debatir proyectos, escuchar posiciones diferentes, negociar modificaciones y votar iniciativas vinculadas con problemas reales del territorio de San Vicente. No buscamos únicamente simular una sesión. Buscamos generar una instancia real de aprendizaje cívico, liderazgo juvenil y participación activa. El objetivo general es recrear el funcionamiento de un Concejo Deliberante para que los estudiantes comprendan cómo se crean las ordenanzas, practiquen debate, negociación y argumentación, y se vinculen con problemáticas locales desde una experiencia participativa concreta. En un contexto donde la política enfrenta desafíos de legitimidad y distancia con la ciudadanía, este tipo de iniciativas permite reconstruir confianza desde la acción, la cercanía y la formación de nuevos liderazgos.',
+  'audio-modal2': 'Capacitación Virtual Previa. Modalidad virtual por Google Meet, días previos al simulacro. Duración: una hora a una hora y treinta minutos. A cargo de la Concejal Verónica Sagol. Esta capacitación es la instancia previa indispensable para participar correctamente en el simulacro. No es un requisito burocrático: es donde vas a aprender todo lo necesario para desenvolverte en el recinto. Bloque uno: el HCD y sus funciones. Diferencia entre Departamento Ejecutivo y Legislativo, qué es el HCD, funciones principales e importancia de la representación local. Bloque dos: el rol del concejal. Qué es un concejal, cómo presenta proyectos, cómo debate y vota, y cómo construye consensos. Bloque tres: las comisiones legislativas. Qué son las comisiones, para qué sirven y cómo se analiza un proyecto antes de llegar al recinto. Bloque cuatro: qué es una ordenanza y cómo se presenta. Y bloque cinco: cómo funciona una sesión legislativa real. La capacitación cierra con una trivia interactiva en Kahoot para repasar los contenidos de forma dinámica.',
+  'audio-modal3': 'Guía de Bloques Políticos. La asignación se realiza por sorteo el mismo día del evento. Bloque Liberal, con seis participantes: creen en la libertad individual y un Estado eficiente y pequeño. Promueven la iniciativa privada como motor del desarrollo y buscan mejorar la eficiencia del Estado en sus funciones mínimas. Bloque Progresista, con seis participantes: creen en un Estado presente y activo que garantice derechos y reduzca desigualdades. Priorizan la inclusión social y las políticas públicas activas. Bloque Ambiental, con cuatro participantes: priorizan el cuidado del ambiente y el desarrollo sostenible. Ninguna medida que tenga impacto ambiental negativo es aceptable sin compensación y alternativa. Bloque Vecinalista, con cuatro participantes: se enfocan en resolver problemas concretos de los vecinos. Priorizan la cercanía con el ciudadano y las soluciones rápidas y prácticas por encima del debate ideológico.',
+  'audio-modal4': 'Los Proyectos a Debatir. Dos ordenanzas sobre problemáticas reales de San Vicente. Proyecto A: Programa Municipal de Paradas Seguras e Iluminación Inteligente. Los bloques Liberal y Vecinalista lideran este proyecto. Aborda la seguridad vial y el acceso seguro a los espacios públicos en San Vicente. El Liberal priorizará la eficiencia del gasto y el rol privado en la solución. El Vecinalista priorizará las soluciones rápidas y la demanda del vecino. Ambos pueden recibir modificaciones de los otros bloques en el recinto. Proyecto B: Plan Integral de Limpieza, Reciclaje y Recuperación de Espacios Públicos. Los bloques Progresista y Ambiental lideran este proyecto. Aborda la gestión de residuos urbanos, el reciclaje y la recuperación de espacios públicos degradados en San Vicente. La estructura de un proyecto de ordenanza incluye: título, problema identificado, fundamentación, objetivo, articulado e implementación. El bloque que mejor argumente su proyecto y logre sumar votos de otros bloques será el favorito del jurado.'
+};
+
+let audioActivo = null;
+let utteranceActiva = null;
+
+function hablar(texto, btnEl) {
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(texto);
+  u.lang = 'es-AR';
+  u.rate = 0.97;
+  u.pitch = 1;
+
+  const voces = window.speechSynthesis.getVoices();
+  const voz = voces.find(v => v.lang.startsWith('es') && v.name.includes('Argentina'))
+           || voces.find(v => v.lang.startsWith('es'));
+  if (voz) u.voice = voz;
+
+  u.onstart = () => {
+    if (btnEl) { btnEl.textContent = '⏹ Detener'; btnEl.classList.add('btn-stop'); }
+  };
+  u.onend = () => {
+    audioActivo = null; utteranceActiva = null;
+    if (btnEl) { btnEl.textContent = '▶ Escuchar'; btnEl.classList.remove('btn-stop'); }
+  };
+  u.onerror = () => {
+    audioActivo = null; utteranceActiva = null;
+    if (btnEl) { btnEl.textContent = '▶ Escuchar'; btnEl.classList.remove('btn-stop'); }
+  };
+
+  utteranceActiva = u;
+  window.speechSynthesis.speak(u);
+}
+
+function toggleAudio(btn, key) {
+  if (audioActivo === key) {
+    window.speechSynthesis.cancel();
+    audioActivo = null;
+    btn.textContent = '▶ Escuchar';
+    btn.classList.remove('btn-stop');
+    return;
+  }
+  // Reset botones anteriores
+  document.querySelectorAll('.btn-escuchar.btn-stop').forEach(b => {
+    b.classList.remove('btn-stop');
+    if (b.textContent.includes('Detener')) b.textContent = '▶ Escuchar';
+  });
+  audioActivo = key;
+  hablar(AUDIOS[key], btn);
+}
+
+function toggleAudioModal(btn, key) {
+  toggleAudio(btn, key);
+}
+
+function abrirModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+  window.speechSynthesis.cancel();
+  audioActivo = null;
+  document.querySelectorAll('.btn-escuchar.btn-stop').forEach(b => {
+    b.classList.remove('btn-stop');
+    if (b.textContent.includes('Detener')) b.textContent = '▶ Escuchar';
+  });
+}
+
+function abrirContacto() { abrirModal('modal-contacto'); }
+
+function abrirMail() {
+  window.location.href = 'mailto:compudelconsejo@gmail.com?subject=Consulta%20Concejal%20por%20un%20D%C3%ADa&body=Hola%2C%20quiero%20consultar%20sobre...';
+  cerrarModal('modal-contacto');
+}
+
+// Cargar voces al iniciar
+window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+
+// Formulario de inscripción
+document.getElementById('form-inscripcion').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = '⏳ Enviando...';
+
+  const nombre  = document.getElementById('f-nombre').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const whatsapp = document.getElementById('f-wsp').value.trim();
+  const escuela = document.getElementById('f-escuela').value.trim();
+
+  try {
+    // PASO 1: Guardar inscripción en Supabase
+    const resIns = await fetch(`${SUPABASE_URL}/rest/v1/inscripciones`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON,
+        'Authorization': `Bearer ${SUPABASE_ANON}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ nombre, email, whatsapp, escuela })
+    });
+    if (!resIns.ok) throw new Error('Error al guardar inscripción');
+
+    // PASO 2: Incrementar el contador via RPC
+    const resRpc = await fetch(`${SUPABASE_URL}/rest/v1/rpc/incrementar_contador`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON,
+        'Authorization': `Bearer ${SUPABASE_ANON}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({})
+    });
+    if (resRpc.ok) {
+      const nuevoValor = await resRpc.json();
+      const c = document.getElementById('contador');
+      if (c) c.textContent = nuevoValor;
+    }
+
+    // Mostrar éxito
+    document.getElementById('form-inscripcion').style.display = 'none';
+    document.getElementById('form-exito').style.display = 'block';
+  } catch(err) {
+    console.error(err);
+    btn.disabled = false;
+    btn.textContent = '🚀 Enviar inscripción';
+    alert('Hubo un error al enviar tu inscripción. Por favor intentá de nuevo.');
+  }
+});
+
+// Cerrar modales al hacer clic afuera
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) {
+      cerrarModal(this.id);
+    }
+  });
+});
+
+// Animación del contador
+function animarContador(el, target) {
+  let current = target - 3;
+  const interval = setInterval(() => {
+    if (current >= target) { el.textContent = target; clearInterval(interval); return; }
+    el.textContent = current++;
+  }, 120);
+}
+window.addEventListener('load', async () => {
+  cargarNovedad();
+  try {
+    const res = await fetch(
+      SUPABASE_URL + '/rest/v1/configuracion_contador?select=valor&id=eq.1',
+      { headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON } }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      const valor = (data && data[0]) ? data[0].valor : 27;
+      setTimeout(() => animarContador(document.getElementById('contador'), valor), 600);
+    } else {
+      setTimeout(() => animarContador(document.getElementById('contador'), 27), 600);
+    }
+  } catch(e) {
+    setTimeout(() => animarContador(document.getElementById('contador'), 27), 600);
+  }
+});
+
+// ── ACORDEÓN ──
+function toggleAcordeon(id) {
+  const item = document.getElementById(id);
+  const estaAbierto = item.classList.contains('abierto');
+  // Cerrar todos
+  document.querySelectorAll('.acordeon-item.abierto').forEach(i => i.classList.remove('abierto'));
+  // Abrir el clickeado si estaba cerrado
+  if (!estaAbierto) item.classList.add('abierto');
+}
+
+// ── NOVEDAD DESDE SUPABASE ──
+const SUPABASE_URL = 'https://zpepnwxedkrnvifelszv.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_Cwm0GB1AQfEZrodcjXPM_g_RiPmAaqC';
+
+async function cargarNovedad() {
+  const contenedor = document.getElementById('novedad-admin-container');
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/noticias?select=*&order=created_at.desc&limit=1`,
+      { headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` } }
+    );
+    if (!res.ok) throw new Error('error');
+    const data = await res.json();
+    if (!data || data.length === 0) {
+      contenedor.innerHTML = `<div class="novedad-admin-skeleton">📭 No hay novedades publicadas todavía.</div>`;
+      return;
+    }
+    const n = data[0];
+    const audioKey = 'audio-novedad-admin';
+    if (n.detalle) AUDIOS[audioKey] = n.detalle;
+
+    // Fondo según color gradiente guardado
+    const gradMap = {
+      'from-blue-900 to-indigo-950':   'linear-gradient(135deg,#1e3a5f,#1e1b4b)',
+      'from-emerald-900 to-teal-950':  'linear-gradient(135deg,#064e3b,#042f2e)',
+      'from-purple-900 to-fuchsia-950':'linear-gradient(135deg,#4a1d96,#701a75)',
+      'from-rose-900 to-slate-950':    'linear-gradient(135deg,#881337,#0f172a)',
+    };
+    const bg = gradMap[n.color] || 'linear-gradient(135deg,var(--azul),var(--azul-medio))';
+
+    contenedor.innerHTML = `
+      <div class="novedad-admin-card">
+        <div class="novedad-admin-img" style="background:${bg};">
+          ${n.imagen_url ? `<img src="${n.imagen_url}" alt="${n.titulo || ''}">` : '📢'}
+        </div>
+        <div class="novedad-admin-content">
+          <div>
+            ${n.categoria ? `<div class="novedad-admin-tag">${n.categoria}</div>` : ''}
+            <h3 style="margin-top:10px;">${n.titulo || ''}</h3>
+            <p>${n.detalle || ''}</p>
+          </div>
+          ${n.detalle ? `<button class="btn-escuchar" onclick="toggleAudio(this,'${audioKey}')" style="max-width:220px;font-size:13px;margin-top:12px;">▶ Escuchar novedad</button>` : ''}
+        </div>
+      </div>`;
+  } catch(e) {
+    contenedor.innerHTML = `<div class="novedad-admin-skeleton">📭 No hay novedades publicadas todavía.</div>`;
+  }
+}
+</script>
+</body>
+</html>

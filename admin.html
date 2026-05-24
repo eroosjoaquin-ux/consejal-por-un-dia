@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Control · HCD San Vicente</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
+
+  <!-- CABECERA -->
+  <header class="bg-slate-950 border-b border-slate-800 py-5 px-6 shadow-xl">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div class="space-y-1">
+        <div class="flex items-center gap-2">
+          <span class="bg-amber-400 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider">Admin Privado</span>
+          <h1 class="text-xl font-black tracking-tight text-white">Consola de Publicación · HCD San Vicente</h1>
+        </div>
+        <p class="text-xs text-slate-400">Escribí en la tabla <code class="text-amber-400">noticias</code> de Supabase. Lo que publicás acá aparece automáticamente en la landing.</p>
+      </div>
+      <span class="text-xs font-mono text-emerald-400 bg-emerald-400/5 border border-emerald-400/20 px-3 py-1.5 rounded-xl whitespace-nowrap">● Canal Seguro Activo</span>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto w-full px-4 py-10 flex-grow space-y-8">
+
+    <!-- ── NOTICIA ACTUAL ── -->
+    <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-base font-bold text-amber-400">📋 Noticia actualmente publicada</h2>
+        <button onclick="cargarNoticiaActual()" class="text-xs text-slate-400 hover:text-white border border-slate-700 hover:border-slate-500 px-3 py-1.5 rounded-lg transition-all">↺ Actualizar</button>
+      </div>
+      <div id="noticia-actual">
+        <div class="text-center py-8 text-slate-500 text-sm">Cargando...</div>
+      </div>
+    </div>
+
+    <!-- ── INSCRIPTOS ── -->
+    <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-base font-bold text-amber-400">📋 Correos registrados</h2>
+        <button onclick="cargarInscriptos()" class="text-xs text-slate-400 hover:text-white border border-slate-700 hover:border-slate-500 px-3 py-1.5 rounded-lg transition-all">↺ Actualizar</button>
+      </div>
+      <div id="inscriptos-container">
+        <div class="text-center py-8 text-slate-500 text-sm">Cargando...</div>
+      </div>
+    </div>
+
+    <!-- ── FORMULARIO PUBLICAR ── -->
+    <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl">
+      <div class="mb-6">
+        <h2 class="text-base font-bold text-amber-400 mb-1">🚀 Publicar nueva noticia</h2>
+        <p class="text-xs text-slate-400 leading-relaxed">Completá los campos y publicá. Si ya hay una noticia activa, se <strong class="text-slate-200">reemplaza automáticamente</strong> (se borra la anterior y se inserta la nueva). La landing siempre muestra la más reciente.</p>
+      </div>
+
+      <form id="form-admin" class="space-y-5">
+        <!-- Título -->
+        <div>
+          <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Título de la Novedad</label>
+          <input type="text" id="titulo" required placeholder="Ej: ¡Cronograma modificado para las escuelas de Alejandro Korn!"
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 placeholder:text-slate-600 transition-colors">
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <!-- Categoría -->
+          <div>
+            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Categoría / Etiqueta</label>
+            <input type="text" id="categoria" required placeholder="Ej: Comunicado, Capacitación, Urgente"
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 placeholder:text-slate-600 transition-colors">
+          </div>
+          <!-- Color / Visual -->
+          <div>
+            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Imagen destacada (color de fondo)</label>
+            <select id="color-gradiente"
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors">
+              <option value="from-blue-900 to-indigo-950">📸 Azul · Recinto Institucional</option>
+              <option value="from-emerald-900 to-teal-950">📸 Verde · Trabajo en Comisión</option>
+              <option value="from-purple-900 to-fuchsia-950">📸 Violeta · Entrega de Premios</option>
+              <option value="from-rose-900 to-slate-950">📸 Rojo · Alerta / Cambio Técnico</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Texto / audio -->
+        <div>
+          <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Cuerpo del artículo <span class="text-amber-400 normal-case font-normal">(este mismo texto lo leerá el botón de audio en la landing)</span></label>
+          <textarea id="detalle" rows="5" required
+            placeholder="Escribí el anuncio completo. Los participantes verán este texto y, al tocar el botón de reproducir, el sistema leerá exactamente este mismo texto en voz alta..."
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 placeholder:text-slate-600 leading-relaxed transition-colors resize-none"></textarea>
+          <p class="text-[11px] text-slate-500 mt-1.5">💡 Tip: escribí oraciones completas y claras, sin abreviaturas, para que el audio suene natural.</p>
+        </div>
+
+        <!-- Feedback -->
+        <div id="feedback" class="hidden"></div>
+
+        <button type="submit" id="btn-publicar"
+          class="w-full bg-amber-400 hover:bg-amber-500 active:bg-amber-600 text-slate-950 font-black py-4 rounded-xl text-xs uppercase tracking-widest transition-all shadow-lg shadow-amber-400/10 cursor-pointer disabled:opacity-50">
+          🚀 PUBLICAR EN LA LANDING PÚBLICA
+        </button>
+      </form>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-center py-5 border-t border-slate-800 text-xs text-slate-600">
+    <p>© 2026 Panel de Administración Privado · HCD San Vicente · Exclusivo coordinación interna.</p>
+  </footer>
+
+  <script>
+    // ── SUPABASE CONFIG ──
+    // IMPORTANTE: reemplazá SUPABASE_ANON_KEY con tu clave anon real desde
+    // Supabase Dashboard → Settings → API → Project API keys → anon public
+    const SUPABASE_URL  = 'https://zpepnwxedkrnvifelszv.supabase.co';
+    const SUPABASE_KEY  = 'sb_publishable_Cwm0GB1AQfEZrodcjXPM_g_RiPmAaqC';
+    const { createClient } = supabase;
+    const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // ── HELPERS ──
+    const gradMap = {
+      'from-blue-900 to-indigo-950':    'linear-gradient(135deg,#1e3a5f,#1e1b4b)',
+      'from-emerald-900 to-teal-950':   'linear-gradient(135deg,#064e3b,#042f2e)',
+      'from-purple-900 to-fuchsia-950': 'linear-gradient(135deg,#4a1d96,#701a75)',
+      'from-rose-900 to-slate-950':     'linear-gradient(135deg,#881337,#0f172a)',
+    };
+    const labelMap = {
+      'from-blue-900 to-indigo-950':    '📸 Azul · Recinto',
+      'from-emerald-900 to-teal-950':   '📸 Verde · Comisión',
+      'from-purple-900 to-fuchsia-950': '📸 Violeta · Premios',
+      'from-rose-900 to-slate-950':     '📸 Rojo · Alerta',
+    };
+
+    function setFeedback(msg, tipo) {
+      const el = document.getElementById('feedback');
+      el.className = `rounded-xl px-4 py-3 text-sm font-semibold ${tipo === 'ok' ? 'bg-emerald-400/10 text-emerald-300 border border-emerald-400/20' : 'bg-rose-400/10 text-rose-300 border border-rose-400/20'}`;
+      el.textContent = msg;
+      el.classList.remove('hidden');
+      setTimeout(() => el.classList.add('hidden'), 5000);
+    }
+
+    // ── CARGAR NOTICIA ACTUAL ──
+    async function cargarNoticiaActual() {
+      const el = document.getElementById('noticia-actual');
+      el.innerHTML = `<div class="text-center py-8 text-slate-500 text-sm">Cargando...</div>`;
+      try {
+        const { data, error } = await db
+          .from('noticias')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+          el.innerHTML = `<div class="text-center py-8 text-slate-500 text-sm">📭 No hay ninguna noticia publicada todavía.</div>`;
+          return;
+        }
+
+        const n = data[0];
+        const bg = gradMap[n.color] || 'linear-gradient(135deg,#1a3a5c,#2563a8)';
+        const label = labelMap[n.color] || n.color;
+        const fecha = n.created_at ? new Date(n.created_at).toLocaleString('es-AR', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '';
+
+        el.innerHTML = `
+          <div class="flex flex-col sm:flex-row gap-4 bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden">
+            <div class="w-full sm:w-36 h-32 sm:h-auto flex-shrink-0 flex items-center justify-center text-4xl" style="background:${bg};">📢</div>
+            <div class="flex-1 p-4 space-y-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[10px] font-black uppercase tracking-wider bg-amber-400/10 text-amber-400 border border-amber-400/20 px-2 py-0.5 rounded-full">${n.categoria || '—'}</span>
+                <span class="text-[10px] text-slate-500">${label}</span>
+                <span class="text-[10px] text-slate-600 ml-auto">${fecha}</span>
+              </div>
+              <p class="text-sm font-bold text-white leading-snug">${n.titulo || '—'}</p>
+              <p class="text-xs text-slate-400 leading-relaxed line-clamp-3">${n.detalle || '—'}</p>
+            </div>
+          </div>
+          <div class="mt-4 flex justify-end">
+            <button onclick="borrarNoticia('${n.id}')"
+              class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 hover:border-rose-400/40 text-xs font-bold px-4 py-2 rounded-xl transition-all cursor-pointer">
+              🗑️ Borrar esta noticia
+            </button>
+          </div>`;
+      } catch(e) {
+        el.innerHTML = `<div class="text-center py-6 text-rose-400 text-sm">⚠️ Error al conectar con Supabase. Verificá la clave API.</div>`;
+      }
+    }
+
+    // ── BORRAR NOTICIA ──
+    async function borrarNoticia(id) {
+      if (!confirm('¿Seguro que querés borrar esta noticia? La landing quedará sin novedades hasta que publiques una nueva.')) return;
+      const { error } = await db.from('noticias').delete().eq('id', id);
+      if (error) { setFeedback('❌ Error al borrar: ' + error.message, 'error'); return; }
+      setFeedback('✅ Noticia borrada. La landing ya no muestra ninguna novedad.', 'ok');
+      cargarNoticiaActual();
+    }
+
+    // ── PUBLICAR NUEVA NOTICIA ──
+    document.getElementById('form-admin').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-publicar');
+      btn.disabled = true;
+      btn.textContent = '⏳ Publicando...';
+
+      const titulo    = document.getElementById('titulo').value.trim();
+      const categoria = document.getElementById('categoria').value.trim();
+      const color     = document.getElementById('color-gradiente').value;
+      const detalle   = document.getElementById('detalle').value.trim();
+
+      try {
+        // 1. Borrar todas las anteriores (solo mostramos 1 a la vez)
+        await db.from('noticias').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+
+        // 2. Insertar la nueva
+        const { error } = await db.from('noticias').insert([{ titulo, categoria, color, detalle }]);
+        if (error) throw error;
+
+        setFeedback('🎉 ¡Publicado con éxito! La landing ya muestra la nueva noticia.', 'ok');
+        document.getElementById('form-admin').reset();
+        cargarNoticiaActual();
+      } catch(err) {
+        setFeedback('❌ Error al publicar: ' + err.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🚀 PUBLICAR EN LA LANDING PÚBLICA';
+      }
+    });
+
+    // ── CARGAR INSCRIPTOS ──
+    async function cargarInscriptos() {
+      const el = document.getElementById('inscriptos-container');
+      el.innerHTML = `<div class="text-center py-8 text-slate-500 text-sm">Cargando...</div>`;
+      try {
+        const { data, error } = await db
+          .from('inscripciones')
+          .select('nombre, email, escuela, whatsapp, created_at')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+          el.innerHTML = `<div class="text-center py-8 text-slate-500 text-sm">📭 Aún no hay inscriptos.</div>`;
+          return;
+        }
+
+        const rows = data.map((r, i) => {
+          const fecha = r.created_at ? new Date(r.created_at).toLocaleString('es-AR', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '';
+          return `<tr class="border-b border-slate-800 hover:bg-slate-900/50 transition-colors">
+            <td class="px-3 py-3 text-xs text-slate-400 text-center">${i + 1}</td>
+            <td class="px-3 py-3 text-sm text-white font-medium">${r.nombre || '—'}</td>
+            <td class="px-3 py-3 text-sm text-amber-400 font-mono">${r.email || '—'}</td>
+            <td class="px-3 py-3 text-xs text-slate-400">${r.escuela || '—'}</td>
+            <td class="px-3 py-3 text-xs text-slate-500 whitespace-nowrap">${fecha}</td>
+          </tr>`;
+        }).join('');
+
+        el.innerHTML = `
+          <div class="mb-3 flex items-center gap-2">
+            <span class="text-xs text-emerald-400 font-bold bg-emerald-400/10 border border-emerald-400/20 px-3 py-1 rounded-full">● ${data.length} inscripto${data.length !== 1 ? 's' : ''}</span>
+          </div>
+          <div class="overflow-x-auto rounded-xl border border-slate-800">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="bg-slate-900 border-b border-slate-700">
+                  <th class="px-3 py-2.5 text-[10px] font-black uppercase tracking-wider text-slate-500 text-center">#</th>
+                  <th class="px-3 py-2.5 text-[10px] font-black uppercase tracking-wider text-slate-500">Nombre</th>
+                  <th class="px-3 py-2.5 text-[10px] font-black uppercase tracking-wider text-slate-500">Email</th>
+                  <th class="px-3 py-2.5 text-[10px] font-black uppercase tracking-wider text-slate-500">Escuela</th>
+                  <th class="px-3 py-2.5 text-[10px] font-black uppercase tracking-wider text-slate-500">Fecha</th>
+                </tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>`;
+      } catch(e) {
+        el.innerHTML = `<div class="text-center py-6 text-rose-400 text-sm">⚠️ Error al cargar inscriptos. Verificá la clave API.</div>`;
+      }
+    }
+
+    // ── INIT ──
+    cargarNoticiaActual();
+    cargarInscriptos();
+  </script>
+</body>
+</html>
