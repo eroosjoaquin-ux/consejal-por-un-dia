@@ -660,33 +660,56 @@
   /* ── MODAL CONTACTO ── */
   .modal-contacto .modal { max-width: 440px; }
 
-  /* ── NOVEDADES ── */
-  .novedades-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 22px;
-  }
-  .novedad-card {
-    background: white; border: 1px solid #dde5f0; border-radius: 18px; overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,.04);
-  }
-  .novedad-img {
-    height: 120px; background: linear-gradient(135deg, var(--azul), var(--azul-medio));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 36px;
-  }
-  .novedad-body { padding: 18px; }
-  .novedad-tag {
-    font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
-    color: var(--azul-medio); background: #e8f0fb; padding: 3px 10px; border-radius: 20px;
-    display: inline-block; margin-bottom: 8px;
-  }
-  .novedad-body h4 { font-size: 15px; font-weight: 700; color: var(--azul); margin-bottom: 6px; line-height: 1.3; }
-  .novedad-body p { font-size: 13px; color: var(--gris); line-height: 1.5; }
-  .novedad-footer {
-    padding: 0 18px 18px;
-  }
-  .novedad-footer .btn-escuchar { font-size: 12px; padding: 10px; }
+  /* ── NOVEDADES (Carrusel) ── */
+.scroll-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.novedades-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 22px;
+  padding: 20px 0;
+  scrollbar-width: none; /* Ocultar barra en Firefox */
+}
+.novedades-grid::-webkit-scrollbar { display: none; } /* Ocultar barra en Chrome */
+
+.novedad-card {
+  background: white; border: 1px solid #dde5f0; border-radius: 18px; overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.04);
+  min-width: 300px; /* Esto es vital: asegura que la card no se achique */
+}
+.novedad-img {
+  height: 120px; background: linear-gradient(135deg, var(--azul), var(--azul-medio));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+}
+.novedad-body { padding: 18px; }
+.novedad-tag {
+  font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--azul-medio); background: #e8f0fb; padding: 3px 10px; border-radius: 20px;
+  display: inline-block; margin-bottom: 8px;
+}
+.novedad-body h4 { font-size: 15px; font-weight: 700; color: var(--azul); margin-bottom: 6px; line-height: 1.3; }
+.novedad-body p { font-size: 13px; color: var(--gris); line-height: 1.5; }
+.novedad-footer { padding: 0 18px 18px; }
+.novedad-footer .btn-escuchar { font-size: 12px; padding: 10px; }
+
+/* Botones del Carrusel */
+.nav-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 10; background: white; border: 1px solid #ddd;
+  border-radius: 50%; width: 45px; height: 45px;
+  cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  font-size: 20px; display: flex; align-items: center; justify-content: center;
+}
+.btn-left { left: -20px; }
+.btn-right { right: -20px; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
