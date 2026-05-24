@@ -1786,39 +1786,31 @@ const SUPABASE_ANON = 'sb_publishable_Cwm0GB1AQfEZrodcjXPM_g_RiPmAaqC';
 // ── BRANDING DINÁMICO (logo y portada desde Supabase Storage) ──
 async function cargarBranding() {
   const base = `${SUPABASE_URL}/storage/v1/object/public`;
-
-  // Extensiones a intentar en orden
-  const exts = ['jpg', 'jpeg', 'png', 'webp'];
+  const ts = Date.now(); // cache-busting: evita que el navegador muestre la imagen anterior
 
   // ── LOGO ──
-  for (const ext of exts) {
-    const url = `${base}/logo/logo_actual.${ext}`;
-    try {
-      const res = await fetch(url, { method: 'HEAD' });
-      if (res.ok) {
-        const img = document.getElementById('img-logo-hcd');
-        if (img) { img.src = url; img.style.display = ''; }
-        break;
-      }
-    } catch(_) {}
-  }
+  const urlLogo = `${base}/logo/logo_actual.jpg?t=${ts}`;
+  try {
+    const res = await fetch(urlLogo, { method: 'HEAD' });
+    if (res.ok) {
+      const img = document.getElementById('img-logo-hcd');
+      if (img) { img.src = urlLogo; img.style.display = ''; }
+    }
+  } catch(_) {}
 
   // ── PORTADA ──
-  for (const ext of exts) {
-    const url = `${base}/portada/portada_actual.${ext}`;
-    try {
-      const res = await fetch(url, { method: 'HEAD' });
-      if (res.ok) {
-        const header = document.getElementById('site-header');
-        if (header) {
-          header.style.backgroundImage = `url('${url}')`;
-          header.style.backgroundSize = 'cover';
-          header.style.backgroundPosition = 'center';
-        }
-        break;
+  const urlPortada = `${base}/portada/portada_actual.jpg?t=${ts}`;
+  try {
+    const res = await fetch(urlPortada, { method: 'HEAD' });
+    if (res.ok) {
+      const header = document.getElementById('site-header');
+      if (header) {
+        header.style.backgroundImage = `url('${urlPortada}')`;
+        header.style.backgroundSize = 'cover';
+        header.style.backgroundPosition = 'center';
       }
-    } catch(_) {}
-  }
+    }
+  } catch(_) {}
 }
 
 async function cargarNovedad() {
