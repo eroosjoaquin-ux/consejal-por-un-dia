@@ -1858,47 +1858,55 @@ try {
 async function cargarNovedad() {
   const contenedor = document.getElementById('novedad-admin-container');
   try {
+    // Acá le decimos que traiga 5 noticias en vez de 1
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/noticias?select=*&order=created_at.desc&limit=1`,
+      `${SUPABASE_URL}/rest/v1/noticias?select=*&order=created_at.desc&limit=5`,
       { headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` } }
     );
     if (!res.ok) throw new Error('error');
     const data = await res.json();
+    
     if (!data || data.length === 0) {
       contenedor.innerHTML = `<div class="novedad-admin-skeleton">📭 No hay novedades publicadas todavía.</div>`;
       return;
     }
-    const n = data[0];
-    const audioKey = 'audio-novedad-admin';
-    if (n.detalle) AUDIOS[audioKey] = n.detalle;
 
-    // Fondo según color gradiente guardado
-    const gradMap = {
-      'from-blue-900 to-indigo-950':   'linear-gradient(135deg,#1e3a5f,#1e1b4b)',
-      'from-emerald-900 to-teal-950':  'linear-gradient(135deg,#064e3b,#042f2e)',
-      'from-purple-900 to-fuchsia-950':'linear-gradient(135deg,#4a1d96,#701a75)',
-      'from-rose-900 to-slate-950':    'linear-gradient(135deg,#881337,#0f172a)',
-    };
-    const bg = gradMap[n.color] || 'linear-gradient(135deg,var(--azul),var(--azul-medio))';
+    // Vaciamos el contenedor antes de llenarlo
+    contenedor.innerHTML = '';
 
-    contenedor.innerHTML = `
-      <div class="novedad-admin-card">
-        <div class="novedad-admin-img" style="background:${bg};">
-          ${n.imagen_url ? `<img src="${n.imagen_url}" alt="${n.titulo || ''}">` : '📢'}
-        </div>
-        <div class="novedad-admin-content">
-          <div>
-            ${n.categoria ? `<div class="novedad-admin-tag">${n.categoria}</div>` : ''}
-            <h3 style="margin-top:10px;">${n.titulo || ''}</h3>
-            <p>${n.detalle || ''}</p>
+    // Metemos TODAS las noticias una al lado de la otra
+    data.forEach((n, index) => {
+      const audioKey = 'audio-novedad-admin-' + index; 
+      if (n.detalle) AUDIOS[audioKey] = n.detalle;
+
+      const gradMap = {
+        'from-blue-900 to-indigo-950':   'linear-gradient(135deg,#1e3a5f,#1e1b4b)',
+        'from-emerald-900 to-teal-950':  'linear-gradient(135deg,#064e3b,#042f2e)',
+        'from-purple-900 to-fuchsia-950':'linear-gradient(135deg,#4a1d96,#701a75)',
+        'from-rose-900 to-slate-950':    'linear-gradient(135deg,#881337,#0f172a)',
+      };
+      const bg = gradMap[n.color] || 'linear-gradient(135deg,var(--azul),var(--azul-medio))';
+
+      contenedor.innerHTML += `
+        <div class="novedad-admin-card" style="min-width: 300px; flex-shrink: 0;">
+          <div class="novedad-admin-img" style="background:${bg};">
+            ${n.imagen_url ? `<img src="${n.imagen_url}" alt="${n.titulo || ''}">` : '📢'}
           </div>
-          ${n.detalle ? `<button class="btn-escuchar" onclick="toggleAudio(this,'${audioKey}')" style="max-width:220px;font-size:13px;margin-top:12px;">▶ Escuchar novedad</button>` : ''}
-        </div>
-      </div>`;
+          <div class="novedad-admin-content">
+            <div>
+              ${n.categoria ? `<div class="novedad-admin-tag">${n.categoria}</div>` : ''}
+              <h3 style="margin-top:10px;">${n.titulo || ''}</h3>
+              <p>${n.detalle || ''}</p>
+            </div>
+            ${n.detalle ? `<button class="btn-escuchar" onclick="toggleAudio(this,'${audioKey}')" style="max-width:220px;font-size:13px;margin-top:12px;">▶ Escuchar novedad</button>` : ''}
+          </div>
+        </div>`;
+    });
   } catch(e) {
     contenedor.innerHTML = `<div class="novedad-admin-skeleton">📭 No hay novedades publicadas todavía.</div>`;
   }
 }
+
 function scrollCarousel(id, distancia) {
   const container = document.getElementById(id);
   container.scrollBy({ left: distancia, behavior: 'smooth' });
