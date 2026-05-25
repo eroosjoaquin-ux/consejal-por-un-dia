@@ -880,7 +880,7 @@
 <!-- TOP BAR -->
 <div class="topbar">
   <span>🏛️ Honorable Concejo Deliberante de San Vicente · Provincia de Buenos Aires</span>
-  <span>📍 9 de Julio 47, San Vicente · <a href="mailto:compudelconsejo@gmail.com">compudelconsejo@gmail.com</a></span>
+  <span>📍 9 de Julio 47, San Vicente · <a href="mailto:compudelconsejo@gmail.com"></a></span>
 </div>
 
 <!-- HEADER -->
@@ -897,7 +897,7 @@
           San Vicente · Prov. de Buenos Aires
         </div>
       </div>
-      <div class="badge-oficial">Programa Oficial de Formación Cívica 2025</div>
+      <div class="badge-oficial">Programa Oficial de Formación Cívica 2026</div>
       <h1>Concejal<br><em>por un Día</em></h1>
       <p class="header-sub">Ocupá una banca real. Debatí proyectos de ley. Votá ordenanzas. Y competí por los premios más codiciados de la jornada.</p>
       <div class="header-ctas">
@@ -951,20 +951,26 @@
 
 <div class="divider"></div>
 
-<!-- PANEL NOVEDAD ADMIN (Supabase) -->
-<div style="background:var(--gris-claro);border-bottom:1px solid #dde5f0;">
+<div style="background:var(--gris-claro); border-bottom:1px solid #dde5f0; position:relative; padding: 20px 0;">
   <div class="novedad-admin-panel">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+    
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px; padding: 0 20px;">
       <div class="section-tag" style="margin:0;">📢 Tablón oficial</div>
-      <span style="font-family:'DM Serif Display',serif;font-size:clamp(20px,2.5vw,26px);color:var(--azul);">Novedades del programa</span>
+      <span style="font-family:'DM Serif Display',serif; font-size:clamp(20px,2.5vw,26px); color:var(--azul);">Novedades del programa</span>
     </div>
-    <div id="novedad-admin-container">
-      <div class="novedad-admin-skeleton">⏳ Cargando novedad...</div>
+
+    <div class="scroll-wrapper" style="position: relative; display: flex; align-items: center; width: 100%; padding: 0 20px;">
+      
+      <button class="nav-btn btn-left" onclick="scrollCarousel('novedad-admin-container', -300)" style="position: absolute; left: 0px; top: 50%; transform: translateY(-50%); z-index: 10; cursor: pointer;">←</button>
+
+      <div id="novedad-admin-container" class="novedades-grid" style="display: flex; flex-wrap: nowrap; overflow-x: auto; scroll-behavior: smooth; gap: 22px; width: 100%; padding-bottom: 10px;">
+        <div class="novedad-admin-skeleton" style="min-width: 300px;">⏳ Cargando novedades...</div>
+      </div>
+
+      <button class="nav-btn btn-right" onclick="scrollCarousel('novedad-admin-container', 300)" style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); z-index: 10; cursor: pointer;">→</button>
     </div>
   </div>
 </div>
-
-<div class="divider"></div>
 
 <!-- ACORDEÓN DE SECCIONES -->
 <div class="acordeon-wrapper" id="programa">
@@ -1892,6 +1898,10 @@ async function cargarNovedad() {
   } catch(e) {
     contenedor.innerHTML = `<div class="novedad-admin-skeleton">📭 No hay novedades publicadas todavía.</div>`;
   }
+}
+function scrollCarousel(id, distancia) {
+  const container = document.getElementById(id);
+  container.scrollBy({ left: distancia, behavior: 'smooth' });
 }
 </script>
 </body>
