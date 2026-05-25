@@ -1855,10 +1855,41 @@ try {
   } catch(_) {}
 }
 
+let noticiasGuardadas = [];
+
+function crearModalDinamico() {
+  if (!document.getElementById('modal-novedad')) {
+    const modal = `
+    <div class="modal-overlay" id="modal-novedad">
+      <div class="modal">
+        <div class="modal-header">
+          <div>
+            <div class="modal-title" id="mod-nov-titulo">Título</div>
+            <div class="modal-subtitle" id="mod-nov-cat">Categoría</div>
+          </div>
+          <button class="modal-close" onclick="cerrarModal('modal-novedad')">✕</button>
+        </div>
+        <div class="modal-body">
+          <img id="mod-nov-img" src="" style="width:100%; border-radius:12px; margin-bottom:16px; display:none; object-fit:cover; max-height:300px;">
+          <p id="mod-nov-texto" style="font-size: 15px; color: var(--gris); line-height: 1.7;"></p>
+        </div>
+        <div class="modal-audio-bar">
+          <button class="btn-escuchar" id="mod-nov-audio">▶ Escuchar novedad</button>
+          <button class="btn-escuchar btn-stop" style="flex:0;padding:14px 18px;" onclick="cerrarModal('modal-novedad')">✕</button>
+        </div>
+      </div>
+    </div>`;
+    document.body.insertAdjacentHTML('beforeend', modal);
+  }
+}
+
 async function cargarNovedad() {
+  crearModalDinamico();
   const contenedor = document.getElementById('novedad-admin-container');
+  
+  contenedor.style.scrollSnapType = 'x mandatory';
+
   try {
-    // Acá le decimos que traiga 5 noticias en vez de 1
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/noticias?select=*&order=created_at.desc&limit=5`,
       { headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` } }
@@ -1871,10 +1902,9 @@ async function cargarNovedad() {
       return;
     }
 
-    // Vaciamos el contenedor antes de llenarlo
+    noticiasGuardadas = data; 
     contenedor.innerHTML = '';
 
-    // Metemos TODAS las noticias una al lado de la otra
     data.forEach((n, index) => {
       const audioKey = 'audio-novedad-admin-' + index; 
       if (n.detalle) AUDIOS[audioKey] = n.detalle;
@@ -1887,18 +1917,20 @@ async function cargarNovedad() {
       };
       const bg = gradMap[n.color] || 'linear-gradient(135deg,var(--azul),var(--azul-medio))';
 
+      let textoCorto = n.detalle ? n.detalle.substring(0, 110) + '...' : '';
+
       contenedor.innerHTML += `
-        <div class="novedad-admin-card" style="min-width: 300px; flex-shrink: 0;">
+        <div class="novedad-admin-card" onclick="abrirNoticia(${index}, '${audioKey}')" style="min-width: 100%; flex-shrink: 0; scroll-snap-align: center; cursor: pointer; transition: transform 0.2s;">
           <div class="novedad-admin-img" style="background:${bg};">
             ${n.imagen_url ? `<img src="${n.imagen_url}" alt="${n.titulo || ''}">` : '📢'}
           </div>
-          <div class="novedad-admin-content">
+          <div class="novedad-admin-content" style="pointer-events: none;">
             <div>
               ${n.categoria ? `<div class="novedad-admin-tag">${n.categoria}</div>` : ''}
               <h3 style="margin-top:10px;">${n.titulo || ''}</h3>
-              <p>${n.detalle || ''}</p>
+              <p>${textoCorto}</p>
             </div>
-            ${n.detalle ? `<button class="btn-escuchar" onclick="toggleAudio(this,'${audioKey}')" style="max-width:220px;font-size:13px;margin-top:12px;">▶ Escuchar novedad</button>` : ''}
+            <div style="font-size:13px; font-weight:700; color:var(--celeste); margin-top:12px;">+ Tocar para leer completo</div>
           </div>
         </div>`;
     });
@@ -1907,9 +1939,38 @@ async function cargarNovedad() {
   }
 }
 
+function abrirNoticia(index, audioKey) {
+  const n = noticiasGuardadas[index];
+  
+  document.getElementById('mod-nov-titulo').textContent = n.titulo || 'Novedad';
+  document.getElementById('mod-nov-cat').textContent = n.categoria || 'Tablón oficial';
+  document.getElementById('mod-nov-texto').textContent = n.detalle || '';
+  
+  const img = document.getElementById('mod-nov-img');
+  if (n.imagen_url) {
+    img.src = n.imagen_url;
+    img.style.display = 'block';
+  } else {
+    img.style.display = 'none';
+  }
+
+  const btnAudio = document.getElementById('mod-nov-audio');
+  if (n.detalle) {
+    btnAudio.style.display = 'flex';
+    btnAudio.setAttribute('onclick', `toggleAudioModal(this, '${audioKey}')`);
+    btnAudio.textContent = '▶ Escuchar novedad';
+    btnAudio.classList.remove('btn-stop');
+  } else {
+    btnAudio.style.display = 'none';
+  }
+
+  abrirModal('modal-novedad');
+}
+
 function scrollCarousel(id, distancia) {
   const container = document.getElementById(id);
-  container.scrollBy({ left: distancia, behavior: 'smooth' });
+  const salto = Math.sign(distancia) * container.clientWidth;
+  container.scrollBy({ left: salto, behavior: 'smooth' });
 }
 </script>
 </body>
