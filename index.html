@@ -1917,8 +1917,6 @@ async function cargarNovedad() {
       };
       const bg = gradMap[n.color] || 'linear-gradient(135deg,var(--azul),var(--azul-medio))';
 
-      let textoCorto = n.detalle ? n.detalle.substring(0, 110) + '...' : '';
-
       contenedor.innerHTML += `
         <div class="novedad-admin-card" onclick="abrirNoticia(${index}, '${audioKey}')" style="min-width: 100%; flex-shrink: 0; scroll-snap-align: center; cursor: pointer; transition: transform 0.2s;">
           <div class="novedad-admin-img" style="background:${bg};">
@@ -1928,7 +1926,7 @@ async function cargarNovedad() {
             <div>
               ${n.categoria ? `<div class="novedad-admin-tag">${n.categoria}</div>` : ''}
               <h3 style="margin-top:10px;">${n.titulo || ''}</h3>
-              <p>${textoCorto}</p>
+              <p style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 8px;">${n.detalle || ''}</p>
             </div>
             <div style="font-size:13px; font-weight:700; color:var(--celeste); margin-top:12px;">+ Tocar para leer completo</div>
           </div>
