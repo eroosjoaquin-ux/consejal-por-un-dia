@@ -667,7 +667,6 @@
   align-items: center;
   width: 100%;
 }
-
 .novedades-grid {
   display: flex;
   flex-wrap: nowrap;
@@ -675,14 +674,14 @@
   scroll-behavior: smooth;
   gap: 22px;
   padding: 20px 0;
-  scrollbar-width: none; /* Ocultar barra en Firefox */
+  scrollbar-width: none;
 }
-.novedades-grid::-webkit-scrollbar { display: none; } /* Ocultar barra en Chrome */
+.novedades-grid::-webkit-scrollbar { display: none; }
 
 .novedad-card {
   background: white; border: 1px solid #dde5f0; border-radius: 18px; overflow: hidden;
   box-shadow: 0 2px 12px rgba(0,0,0,.04);
-  min-width: 300px; /* Esto es vital: asegura que la card no se achique */
+  min-width: 300px;
 }
 .novedad-img {
   height: 120px; background: linear-gradient(135deg, var(--azul), var(--azul-medio));
@@ -711,29 +710,26 @@
 .btn-left { left: -20px; }
 .btn-right { right: -20px; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .header-inner { grid-template-columns: 1fr; }
-    .counter-box { order: -1; }
-    .mapa-grid { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
-    .footer-inner { grid-template-columns: 1fr; }
-    .footer-right { text-align: left; }
-    .fab-contact span { display: none; }
-    .fab-contact { border-radius: 50%; width: 56px; height: 56px; padding: 0; justify-content: center; }
-  }
+/* ── RESPONSIVE GENERAL ── */
+@media (max-width: 768px) {
+  .header-inner { grid-template-columns: 1fr; }
+  .counter-box { order: -1; }
+  .mapa-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-right { text-align: left; }
+  .fab-contact span { display: none; }
+  .fab-contact { border-radius: 50%; width: 56px; height: 56px; padding: 0; justify-content: center; }
+}
 
-  /* ── SECCIÓN SEPARADOR ── */
-  .divider {
-    height: 3px;
-    background: linear-gradient(90deg, var(--azul) 0%, var(--celeste) 50%, transparent 100%);
-  }
-
-  /* ── PANEL NOVEDAD ADMIN (Supabase) ── */
+/* ── PANEL NOVEDAD ADMIN (Diseño Vertical) ── */
 .novedad-admin-panel {
-  max-width: 1100px;
+  max-width: 800px; /* Limitamos el ancho para que el texto no sea eterno */
   margin: 0 auto;
   padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 .novedad-admin-card {
   background: white;
@@ -742,18 +738,16 @@
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(26,58,92,.08);
   display: flex;
-  flex-direction: row; 
-  gap: 0;
+  flex-direction: column; /* FORZAMOS APILADO VERTICAL */
+  width: 100%;
 }
 .novedad-admin-img {
-  width: 300px;
-  min-height: 220px;
-  flex-shrink: 0;
+  width: 100%;
+  height: 250px;
   background: linear-gradient(135deg, var(--azul), var(--azul-medio));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 64px;
   position: relative;
   overflow: hidden;
 }
@@ -761,16 +755,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  position: absolute;
-  inset: 0;
 }
 .novedad-admin-content {
-  flex: 1;
-  padding: 32px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
 }
 .novedad-admin-tag {
   font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
@@ -779,16 +769,17 @@
 }
 .novedad-admin-content h3 {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(20px, 2.5vw, 26px);
+  font-size: 24px;
   color: var(--azul);
-  line-height: 1.2;
   margin: 0;
+  line-height: 1.2;
 }
 .novedad-admin-content p {
   font-size: 15px;
   color: var(--gris);
-  line-height: 1.7;
-  flex: 1;
+  line-height: 1.6;
+  margin: 0;
+  word-wrap: break-word; /* Obliga al texto a bajar de renglón */
 }
 .novedad-admin-skeleton {
   background: var(--gris-claro);
@@ -799,22 +790,6 @@
   font-size: 14px;
   border: 2px dashed #dde5f0;
 }
-
-/* ── AJUSTE MÓVIL ── */
-@media (max-width: 700px) {
-  .novedad-admin-card {
-    flex-direction: column;
-  }
-  .novedad-admin-img {
-    width: 100%;
-    min-height: 160px;
-    height: 160px;
-  }
-  .novedad-admin-content {
-    padding: 16px;
-  }
-}
-
   /* ── ACORDEÓN ── */
   .acordeon-wrapper {
     max-width: 1100px;
