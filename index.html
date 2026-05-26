@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Concejal por un Día · HCD San Vicente</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("y47DkZbZtGD-3uimd");</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -1296,7 +1298,12 @@
         <div class="form-grid">
           <div class="form-group">
             <label>Localidad</label>
-            <input type="text" id="f-localidad" placeholder="Tu localidad" required>
+            <select id="f-localidad" required style="width:100%;padding:13px 16px;border:1.5px solid #dde5f0;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--texto);outline:none;background:#fafbfd;appearance:none;cursor:pointer;">
+              <option value="" disabled selected>Seleccioná tu localidad</option>
+              <option value="San Vicente">San Vicente</option>
+              <option value="Domselaar">Domselaar</option>
+              <option value="Alejandro Korn">Alejandro Korn</option>
+            </select>
           </div>
           <div class="form-group">
             <label>Edad</label>
@@ -1720,11 +1727,14 @@ document.getElementById('form-inscripcion').addEventListener('submit', async fun
         'apikey': SUPABASE_ANON,
         'Authorization': `Bearer ${SUPABASE_ANON}`,
         'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
+        'Prefer': 'return=representation'
       },
       body: JSON.stringify({ nombre, email, whatsapp, escuela, localidad, edad })
     });
     if (!resIns.ok) throw new Error('Error al guardar inscripción');
+    const dataIns = await resIns.json();
+    const token = dataIns[0].token_verificacion;
+    const linkConfirmacion = `https://confirmar-mail.vercel.app/?token=${token}`;
 
     // PASO 2: Incrementar el contador via RPC
     const resRpc = await fetch(`${SUPABASE_URL}/rest/v1/rpc/incrementar_contador`, {
@@ -1741,6 +1751,17 @@ document.getElementById('form-inscripcion').addEventListener('submit', async fun
       const c = document.getElementById('contador');
       if (c) c.textContent = nuevoValor;
     }
+
+    // PASO 3: Enviar email de confirmación via EmailJS
+    await emailjs.send("service_ti3mdiy", "template_znwqn8e", {
+      nombre:    nombre,
+      email:     email,
+      whatsapp:  whatsapp,
+      escuela:   escuela,
+      localidad: localidad,
+      edad:      edad,
+      link_confirmacion: linkConfirmacion
+    });
 
     // Mostrar éxito
     document.getElementById('form-inscripcion').style.display = 'none';
