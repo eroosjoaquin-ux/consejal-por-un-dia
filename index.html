@@ -1770,10 +1770,10 @@ document.getElementById('form-inscripcion').addEventListener('submit', async fun
     try {
       const GAS_URL = 'https://script.google.com/macros/s/AKfycbwoMTEZTPsnA-3TWduXc-aXOijsQ1jFXtaFhNti9BAvgqogqyudzd4XKyd-GQEcGHnm/exec';
       const TOKEN_SECRETO = 'HCD_SanVicente_2026_Secure_Key';
-
-      const resEmail = await fetch(GAS_URL, {
+      await fetch(GAS_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({
           token:             TOKEN_SECRETO,
           email:             email,
@@ -1785,22 +1785,15 @@ document.getElementById('form-inscripcion').addEventListener('submit', async fun
           link_confirmacion: linkConfirmacion
         })
       });
-      const dataEmail = await resEmail.json();
-      if (dataEmail.status !== 'success') {
-        console.warn('El mail no se pudo enviar:', dataEmail.message);
-      }
     } catch(emailErr) {
-      // Si el mail falla (CORS, red, etc.) solo lo logueamos
-      // La inscripción ya se guardó en Supabase, no hay que mostrar error al usuario
-      console.warn('Error al enviar mail de confirmación:', emailErr);
+      console.warn('Error al enviar mail:', emailErr);
     }
     //EROS
 
-    // Mostrar éxito (siempre, porque Supabase ya guardó bien)
+    // Mostrar éxito
     document.getElementById('form-inscripcion').style.display = 'none';
     document.getElementById('form-exito').style.display = 'block';
   } catch(err) {
-    // Este catch solo se activa si falla Supabase (PASO 1 o PASO 2)
     console.error(err);
     btn.disabled = false;
     btn.textContent = '🚀 Enviar inscripción';
