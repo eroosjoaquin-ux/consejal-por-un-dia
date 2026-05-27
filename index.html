@@ -1752,16 +1752,43 @@ document.getElementById('form-inscripcion').addEventListener('submit', async fun
       if (c) c.textContent = nuevoValor;
     }
 
-    // PASO 3: Enviar email de confirmación via EmailJS
-    await// emailjs.send("service_ti3mdiy", "template_znwqn8e", {
-      nombre:    nombre,
-      email:     email,
-      whatsapp:  whatsapp,
-      escuela:   escuela,
-      localidad: localidad,
-      edad:      edad,
-      link_confirmacion: linkConfirmacion
+    // PASO 3: Enviar email de confirmación
+
+    // //EROS funcion vieja apagada
+    // await emailjs.send("service_ti3mdiy", "template_znwqn8e", {
+    //   nombre:    nombre,
+    //   email:     email,
+    //   whatsapp:  whatsapp,
+    //   escuela:   escuela,
+    //   localidad: localidad,
+    //   edad:      edad,
+    //   link_confirmacion: linkConfirmacion
+    // });
+    // //EROS
+
+    //EROS funcion nueva
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwoMTEZTPsnA-3TWduXc-aXOijsQ1jFXtaFhNti9BAvgqogqyudzd4XKyd-GQEcGHnm/exec';
+    const TOKEN_SECRETO = 'HCD_SanVicente_2026_Secure_Key';
+
+    const resEmail = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        token:             TOKEN_SECRETO,
+        email:             email,
+        name:              nombre,
+        whatsapp:          whatsapp,
+        escuela:           escuela,
+        localidad:         localidad,
+        edad:              edad,
+        link_confirmacion: linkConfirmacion
+      })
     });
+    const dataEmail = await resEmail.json();
+    if (dataEmail.status !== 'success') {
+      console.warn('El mail no se pudo enviar:', dataEmail.message);
+    }
+    //EROS
 
     // Mostrar éxito
     document.getElementById('form-inscripcion').style.display = 'none';
