@@ -1775,6 +1775,7 @@ document.getElementById('form-inscripcion').addEventListener('submit', async fun
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({
+          tipo:              'confirmacion',
           token:             TOKEN_SECRETO,
           email:             email,
           name:              nombre,
